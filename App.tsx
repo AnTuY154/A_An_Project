@@ -44,6 +44,26 @@ const defaultList = [
     label: 'Đỗ Trọng Anh B',
     value: '435356',
   },
+  {
+    label: 'Đỗ Trọng Anh B',
+    value: '335356',
+  },
+  {
+    label: 'Đỗ Trọng Anh B',
+    value: '335357',
+  },
+  {
+    label: 'Đỗ Trọng Anh B',
+    value: '335358',
+  },
+  {
+    label: 'Đỗ Trọng Anh B',
+    value: '335359',
+  },
+  {
+    label: 'Đỗ Trọng Anh B x',
+    value: '3353510',
+  },
 ];
 
 const listWhenSearchA = [
@@ -184,7 +204,7 @@ const App = () => {
 
         <View style={styles.options_container}>
           <FlatList
-            style={{width: '100%'}}
+            style={{width: '100%', height:'60%'}}
             data={listOptions}
             renderItem={renderItem}
             keyExtractor={item => item.value}
