@@ -7,275 +7,35 @@
  *
  * @format
  */
+import {StyleSheet, View, Text, SafeAreaView} from 'react-native';
+import React from 'react';
 
-import {useEffect, useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  TextInput,
-  FlatList,
-  Button,
-  TouchableOpacity,
-} from 'react-native';
-import CheckBoxLabel, {ResultOption} from './component/CheckBoxLabel';
-import React, {useCallback} from 'react';
-import {debounce} from 'lodash';
+import SearchScreen from './screen/searchScreen/SearchScreen';
+import {NavigationContainer} from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import AddNewDiaryScreen from './screen/addNewDiary/AddNewDiary';
+import MasterLayout from './screen/masterLayout/MasterLayout';
 
-const defaultList = [
-  {
-    label: 'Nguyễn Văn A',
-    value: '435352',
-  },
-  {
-    label: 'Nguyễn Văn B',
-    value: '435353',
-  },
-  {
-    label: 'Nguyễn Văn C',
-    value: '435354',
-  },
-  {
-    label: 'Đỗ Trọng A',
-    value: '435355',
-  },
-  {
-    label: 'Đỗ Trọng Anh B',
-    value: '435356',
-  },
-  {
-    label: 'Đỗ Trọng Anh B',
-    value: '335356',
-  },
-  {
-    label: 'Đỗ Trọng Anh B',
-    value: '335357',
-  },
-  {
-    label: 'Đỗ Trọng Anh B',
-    value: '335358',
-  },
-  {
-    label: 'Đỗ Trọng Anh B',
-    value: '335359',
-  },
-  {
-    label: 'Đỗ Trọng Anh B x',
-    value: '3353510',
-  },
-];
-
-const listWhenSearchA = [
-  {
-    label: 'Nguyễn Văn A',
-    value: '435352',
-  },
-  {
-    label: 'Đỗ Trọng A',
-    value: '435355',
-  },
-];
-
-const listWhenSearchB = [
-  {
-    label: 'Nguyễn Văn B',
-    value: '435352',
-  },
-  {
-    label: 'Đỗ Trọng Anh B',
-    value: '435356',
-  },
-];
+// const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
-  const [listOptions, setListOptions] = useState<ResultOption[]>([]);
-  const [isSelectedAll, setIsSelectedAll] = useState<boolean>(false);
-  const [listResult, setListResult] = useState<ResultOption[]>([]);
-
-  useEffect(() => {
-    // call api here
-    setListOptions(defaultList);
-  }, []);
-
-  const handleCheckedItem = (checked: boolean, item: ResultOption) => {
-    if (checked === false && isSelectedAll) {
-      setIsSelectedAll(false);
-    }
-
-    if (checked) {
-      setListResult(current => [...current, item]);
-    } else {
-      setListResult(current => {
-        return current.filter(data => data.value !== item.value);
-      });
-    }
-
-    setListOptions((current: ResultOption[]) => {
-      const cloneList: ResultOption[] = [...current];
-      let count = 0;
-      const checkeData = cloneList.map(data => {
-        if(data.isSelected){
-          count++
-        }
-
-        if (data.value === item.value) {
-          count++;
-          return {
-            ...data,
-            isSelected: checked,
-          };
-        } else {
-          return {
-            ...data,
-          };
-        }
-      });
-
-     
-      if (count === cloneList.length) {
-        setIsSelectedAll(true);
-      }
-
-      return checkeData;
-    });
-  };
-
-  const renderItem = ({item}: any) => {
-    return (
-      <CheckBoxLabel
-        handleChecked={handleCheckedItem}
-        label={item.label}
-        value={item.value}
-        isSelected={item.isSelected}
-      />
-    );
-  };
-
-  const handleSearchApi = (value: string) => {
-    // call api search here
-    if (value.includes('A')) {
-      setListOptions(listWhenSearchA);
-    } else if (value.includes('B')) {
-      setListOptions(listWhenSearchB);
-    } else {
-      setListOptions(defaultList);
-    }
-  };
-
-  const handler = useCallback(debounce(handleSearchApi, 300), []);
-
-  const handleInputChange = (value: string) => {
-    setListResult([]);
-    setIsSelectedAll(false);
-    handler(value);
-  };
-
-  const handleSelectedAll = () => {
-    setIsSelectedAll(current => !current);
-
-    setListOptions((current: any) => {
-      if (!isSelectedAll) {
-        setListResult(current);
-      } else {
-        setListResult([]);
-      }
-
-      const cloneList = [...current];
-      return cloneList.map(item => {
-        return {
-          ...item,
-          isSelected: !isSelectedAll,
-        };
-      });
-    });
-  };
+  const ConvertSearchScreenLayout = () => MasterLayout(SearchScreen());
+  const ConvertAddNewDiaryScreenLayout = () =>
+    MasterLayout(AddNewDiaryScreen());
 
   return (
-    <SafeAreaView style={styles.screen_container}>
-      <View style={styles.box_container}>
-        <View style={styles.search_box_container}>
-          <TextInput
-            onChangeText={handleInputChange}
-            style={styles.search_box}
-            placeholder="Search"
-          />
-        </View>
-
-        <View style={styles.options_container}>
-          <FlatList
-            style={{width: '100%', height:'60%'}}
-            data={listOptions}
-            renderItem={renderItem}
-            keyExtractor={item => item.value}
-          />
- 
-          <TouchableOpacity
-            onPress={handleSelectedAll}
-            style={styles.button_select_all}>
-            <Text>{isSelectedAll ? 'Bỏ chọn tất cả' : 'Chọn tất cả'}</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.result_container}>
-          {listResult.map((item: ResultOption, index: number) => (
-            <Text key={item.value}>{`${index > 0 ? ',' : ''} ${
-              item.label
-            }`}</Text>
-          ))}
-        </View>
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{headerShown: false, tabBarShowLabel: false}}>
+        <Tab.Screen name="Diary" component={ConvertAddNewDiaryScreenLayout} />
+        <Tab.Screen name="Home" component={ConvertSearchScreenLayout} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
 
-const styles = StyleSheet.create({
-  screen_container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box_container: {
-    borderWidth: 1,
-    width: '80%',
-    height: '80%',
-    paddingHorizontal: 10,
-    paddingTop: 30,
-    paddingBottom: 10,
-  },
-  search_box_container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  search_box: {
-    width: '80%',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-  },
-  options_container: {
-    borderWidth: 1,
-    marginTop: 30,
-    paddingVertical: 20,
-    paddingHorizontal: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  button_select_all: {
-    borderWidth: 1,
-    paddingHorizontal: 15,
-    paddingVertical: 5,
-    borderRadius: 8,
-    marginTop: 20,
-  },
-  result_container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    borderWidth: 1,
-    borderTopWidth: 0,
-    padding: 20,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default App;

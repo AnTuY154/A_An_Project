@@ -20,8 +20,6 @@ import {
   StyleProp,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import { NestedItemType } from '../screen/addNewDiary/AddNewDiary';
-
 
 export interface ResultOption {
   label: string;
@@ -33,27 +31,29 @@ interface CheckBoxLabelType {
   label: string;
   value: string;
   isSelected?: boolean;
-  customStyles?: StyleProp<ViewStyle>
-  handleChecked: (checked: boolean, item: any) => void;
+  customStyles?: StyleProp<ViewStyle>;
+  handleChecked: (checked: boolean, item: ResultOption) => void;
 }
 
-const CheckBoxLabel = ({
+const CheckBoxLabelV2 = ({
   isSelected = false,
   label,
   value,
   handleChecked,
-  customStyles
+  customStyles,
 }: CheckBoxLabelType) => {
+  const [checked, setChecked] = useState<boolean>(isSelected);
 
   const handleValueChange = (checked: boolean) => {
-    handleChecked(checked, {value:value,label:label});
+    setChecked(current => !current);
+    handleChecked(checked, {value: value, label: label});
   };
 
   return (
-    <View style={[styles.container,customStyles]}>
+    <View style={[styles.container, customStyles]}>
       <CheckBox
         disabled={false}
-        value={isSelected}
+        value={checked}
         onValueChange={newValue => handleValueChange(newValue)}
       />
       <Text>{label}</Text>
@@ -68,4 +68,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CheckBoxLabel;
+export default CheckBoxLabelV2;
