@@ -26,10 +26,6 @@ const MasterLayout = (Component: any) => {
 const styles = StyleSheet.create({
   screen_container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // padding: 20,
     width: '100%',
   },
 });
