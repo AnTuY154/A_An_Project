@@ -17,6 +17,7 @@ import AddNewDiaryScreen from './screen/addNewDiary/AddNewDiary';
 import MasterLayout from './screen/masterLayout/MasterLayout';
 import SeachAdvancedDemo from './screen/searchAdvancedDemo/seachAdvancedDemo';
 import ManageDoan from './screen/manageDoan/manageDoan';
+import ProblemArising from './screen/poblemArising/ProblemArising';
 
 // const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -31,13 +32,8 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={{headerShown: false}}>
-        {/* <Tab.Screen
-          name="Search Advanced"
-          component={ConvertSeachAdvancedLayout}
-        />
-        <Tab.Screen name="Diary" component={ConvertAddNewDiaryScreenLayout} />
-        <Tab.Screen name="Home" component={ConvertSearchScreenLayout} /> */}
         <Tab.Screen name="Manage Doan" component={ConvertManageDoanLayout} />
+        <Tab.Screen name="ProblemArising" component={ProblemArising} />
       </Tab.Navigator>
     </NavigationContainer>
   );
