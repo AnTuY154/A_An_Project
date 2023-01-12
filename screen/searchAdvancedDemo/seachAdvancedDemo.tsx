@@ -10,41 +10,44 @@
 
 import {StyleSheet, SafeAreaView, View, Text, Button} from 'react-native';
 import React, {useCallback, useMemo, useRef, useState} from 'react';
-import Accordion from 'react-native-collapsible/Accordion';
 import BottomSheet from '@gorhom/bottom-sheet';
+import SeachAdvanced from '../../component/SearchAdvance/searchAdvanced';
 
 const SeachAdvancedDemo = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ['25%', '50%'], []);
+  const snapPoints = useMemo(() => ['10%', '80%'], []);
   const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index);
   }, []);
 
+  // const handleClosePress = () => bottomSheetRef.current.close()
+
+
   return (
-    <View style={styles.container}>
-      <BottomSheet
-        ref={bottomSheetRef}
-        index={1}
-        snapPoints={snapPoints}
-        onChange={handleSheetChanges}>
-        <View style={styles.contentContainer}>
-          <Text>Awesome 🎉</Text>
-        </View>
-      </BottomSheet>
-    </View>
+    <>
+        <Button title="Open"  />
+        <SeachAdvanced/>
+    </>
+
+
+    // <View style={styles.container}>
+    //   <BottomSheet
+    //     enablePanDownToClose
+    //     ref={bottomSheetRef}
+    //     index={1}
+    //     snapPoints={snapPoints}
+    //     onChange={handleSheetChanges}>
+    //     <View style={styles.contentContainer}>
+
+    //       <Text>Awesome 1 🎉</Text>
+    //     </View>
+    //   </BottomSheet>
+    // </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    backgroundColor: 'grey',
-  },
-  contentContainer: {
-    flex: 1,
-    alignItems: 'center',
-  },
+
 });
 
 export default SeachAdvancedDemo;

@@ -15,7 +15,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AddNewDiaryScreen from './screen/addNewDiary/AddNewDiary';
 import MasterLayout from './screen/masterLayout/MasterLayout';
-import SeachAdvanced from './screen/searchAdvanced/seachAdvanced';
+import SeachAdvancedDemo from './screen/searchAdvancedDemo/seachAdvancedDemo';
+import ManageDoan from './screen/manageDoan/manageDoan';
 
 // const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,17 +25,19 @@ const App = () => {
   const ConvertSearchScreenLayout = () => MasterLayout(SearchScreen());
   const ConvertAddNewDiaryScreenLayout = () =>
     MasterLayout(AddNewDiaryScreen());
-  const ConvertSeachAdvancedLayout = () => MasterLayout(SeachAdvanced());
+  const ConvertSeachAdvancedLayout = () => MasterLayout(SeachAdvancedDemo());
+
+  const ConvertManageDoanLayout = () => MasterLayout(ManageDoan());
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{headerShown: false}}>
-        <Tab.Screen
+      <Tab.Navigator screenOptions={{headerShown: false}}>
+        {/* <Tab.Screen
           name="Search Advanced"
           component={ConvertSeachAdvancedLayout}
         />
         <Tab.Screen name="Diary" component={ConvertAddNewDiaryScreenLayout} />
-        <Tab.Screen name="Home" component={ConvertSearchScreenLayout} />
+        <Tab.Screen name="Home" component={ConvertSearchScreenLayout} /> */}
+        <Tab.Screen name="Manage Doan" component={ConvertManageDoanLayout} />
       </Tab.Navigator>
     </NavigationContainer>
   );
