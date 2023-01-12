@@ -23,7 +23,7 @@ import {
 import CheckBoxLabel, {ResultOption} from '../../component/CheckBoxLabel';
 import React, {useCallback} from 'react';
 import {debounce} from 'lodash';
-import { NestedItemType } from '../addNewDiary/AddNewDiary';
+import {NestedItemType} from '../addNewDiary/AddNewDiary';
 
 const defaultList = [
   {
@@ -101,7 +101,10 @@ const SearchScreen = () => {
   }, []);
 
   const handleCheckedItem = (checked: boolean, item: ResultOption) => {
+    console.log(checked);
+    console.log(isSelectedAll);
     if (checked === false && isSelectedAll) {
+      console.log('123');
       setIsSelectedAll(false);
     }
 
@@ -117,17 +120,18 @@ const SearchScreen = () => {
       const cloneList: ResultOption[] = [...current];
       let count = 0;
       const checkeData = cloneList.map(data => {
-        if (data.isSelected) {
-          count++;
-        }
-
         if (data.value === item.value) {
-          count++;
+          if (checked) {
+            count++;
+          }
           return {
             ...data,
             isSelected: checked,
           };
         } else {
+          if (data.isSelected) {
+            count++;
+          }
           return {
             ...data,
           };
@@ -135,6 +139,7 @@ const SearchScreen = () => {
       });
 
       if (count === cloneList.length) {
+        console.log('456');
         setIsSelectedAll(true);
       }
 
@@ -214,6 +219,7 @@ const SearchScreen = () => {
         <TouchableOpacity
           onPress={handleSelectedAll}
           style={styles.button_select_all}>
+          <Text>{`${isSelectedAll}-a`}</Text>
           <Text>{isSelectedAll ? 'Bỏ chọn tất cả' : 'Chọn tất cả'}</Text>
         </TouchableOpacity>
       </View>
@@ -232,7 +238,7 @@ const styles = StyleSheet.create({
   box_container: {
     borderWidth: 1,
     width: '80%',
-    height: '80%',
+    // height: '80%',
     paddingHorizontal: 10,
     paddingTop: 30,
     paddingBottom: 10,
@@ -241,17 +247,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  customCheckboxLabel: {
-    marginTop: 10,
-    padding: 5,
-    borderWidth: 1,
-  },
   search_box: {
     width: '80%',
     borderWidth: 1,
     borderRadius: 8,
-    paddingVertical: 5,
+    paddingVertical: 0,
     paddingHorizontal: 10,
+  },
+  customCheckboxLabel: {
+    marginTop: 10,
+    padding: 5,
+    borderWidth: 1,
   },
   options_container: {
     borderWidth: 1,
