@@ -4,7 +4,8 @@ const images = {
     disable: require('./disbaleactive.png'),
     gitDiff: require('./GitDiff.png'),
     trash: require('./trash.png'),
-    doc: require('./doc.png')
+    doc: require('./doc.png'),
+    searchempty: require('./searchempty.png')
 }
 
 export default images;

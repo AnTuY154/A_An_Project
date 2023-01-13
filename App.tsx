@@ -18,6 +18,10 @@ import MasterLayout from './screen/masterLayout/MasterLayout';
 import SeachAdvancedDemo from './screen/searchAdvancedDemo/seachAdvancedDemo';
 import ManageDoan from './screen/manageDoan/manageDoan';
 import ProblemArising from './screen/poblemArising/ProblemArising';
+import {createStackNavigator} from '@react-navigation/stack';
+import ProblemArisingAdd from './screen/problemArising-add/ProblemArisingAdd';
+
+const Stack = createStackNavigator();
 
 // const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -29,13 +33,23 @@ const App = () => {
   const ConvertSeachAdvancedLayout = () => MasterLayout(SeachAdvancedDemo());
 
   const ConvertManageDoanLayout = () => MasterLayout(ManageDoan());
+
+  function MyStack() {
+    return (
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="ProblemArising" component={ProblemArising} />
+        <Stack.Screen name="ProblemArisingAdd" component={ProblemArisingAdd} />
+      </Stack.Navigator>
+    );
+  }
+
   return (
     <NavigationContainer>
       {/* <Tab.Navigator screenOptions={{headerShown: false}}>
         <Tab.Screen name="Manage Doan" component={ConvertManageDoanLayout} />
         <Tab.Screen name="ProblemArising" component={ProblemArising} />
       </Tab.Navigator> */}
-      <ProblemArising />
+      <MyStack />
     </NavigationContainer>
   );
 };

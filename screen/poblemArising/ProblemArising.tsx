@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {
   Image,
   ImageBackground,
-  Pressable,
   Text,
   TextInput,
   TouchableOpacity,
@@ -11,10 +10,10 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import images from '../assets/images';
-import SwipeableFlatList from 'react-native-swipeable-list';
 import styles from './styles';
 import Modal from 'react-native-modal';
 import ListProblem from './list-problem/ListProblem';
+import {useNavigation} from '@react-navigation/native';
 
 const ProblemArising = () => {
   const data = [
@@ -68,6 +67,7 @@ const ProblemArising = () => {
   const [value, setValue] = useState('');
   const [datalist, setDataList] = useState<any>(data);
   const [isModalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation();
 
   const onChangeText = (text: string) => {
     const response = data.filter(item => {
@@ -85,68 +85,6 @@ const ProblemArising = () => {
     }
   }, [value]);
 
- 
-  // const Item = (itemData: any) => {
-  //   const item = itemData.item.item;
-
-  //   return (
-  //     <Pressable
-  //       style={[styles.containerItem]}
-  //       onPress={() => console.log('pree')}>
-  //       <View
-  //         style={[
-  //           {
-  //             backgroundColor: 'white',
-  //             width: '100%',
-  //             height: '100%',
-  //             zIndex: 99,
-  //           },
-  //         ]}>
-  //         <View style={styles.blockTitle}>
-  //           <Text style={[styles.titleHeaderBlock]}>{item.title}</Text>
-
-  //           <Text
-  //             style={[
-  //               styles.statusBlock,
-  //               item.iconStatus == 'inactive'
-  //                 ? styles.colorInactive
-  //                 : item.iconStatus == 'active'
-  //                 ? styles.colorActive
-  //                 : styles.colorDisable,
-  //             ]}>
-  //             {item.status}
-  //           </Text>
-  //         </View>
-  //         <View style={styles.blockItem}>
-  //           <View style={styles.blockLeft}>
-  //             <Text style={styles.unitBlock}>
-  //               Đơn vị phát sinh: {item.unit}
-  //             </Text>
-  //             <Text style={styles.fieldBlock} numberOfLines={1}>
-  //               Lĩnh vực: {item.unitPerson}
-  //             </Text>
-  //             <Text style={styles.contentBlock} numberOfLines={1}>
-  //               Nội dung: {item.content}
-  //             </Text>
-  //           </View>
-  //           <View style={styles.blockRight}>
-  //             <Text />
-  //             <Image
-  //               source={
-  //                 item.iconStatus == 'active'
-  //                   ? images.active
-  //                   : item.iconStatus == 'inactive'
-  //                   ? images.inactive
-  //                   : images.disable
-  //               }
-  //               style={styles.imageStatus}
-  //             />
-  //           </View>
-  //         </View>
-  //       </View>
-  //     </Pressable>
-  //   );
-  // };
 
   return (
     <View style={styles.container}>
@@ -197,27 +135,28 @@ const ProblemArising = () => {
               <AntDesign name="search1" size={20} style={styles.iconSearch} />
             </View>
           </View>
+
           <View style={styles.containerListData}>
-            <ListProblem
-              setModalVisible={setModalVisible}
-              isModalVisible={isModalVisible}
-              dataList={datalist}
-            />
+            {datalist.length > 0 ? (
+              <ListProblem
+                setModalVisible={setModalVisible}
+                isModalVisible={isModalVisible}
+                dataList={datalist}
+              />
+            ) : (
+              <View style={styles.containerSearchEmpty}>
+                <Image source={images.searchempty} style={styles.emptyImage} />
+                <Text style={styles.textEmpty}>
+                  Không có vấn đề phát sinh nào
+                </Text>
+              </View>
+            )}
           </View>
         </View>
 
         <TouchableOpacity
-          style={{
-            width: 60,
-            height: 60,
-            backgroundColor: '#F4BF40',
-            borderRadius: 150,
-            position: 'absolute',
-            right: 15,
-            bottom: '15%',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+          onPress={() => navigation.navigate('ProblemArisingAdd' as never)}
+          style={styles.iconClick}>
           <Ionicons name="add" color={'white'} size={35} />
         </TouchableOpacity>
       </View>

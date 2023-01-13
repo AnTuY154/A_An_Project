@@ -240,8 +240,27 @@ const styles = StyleSheet.create({
   black: {color: 'black'},
   white: {
     color: 'white',
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
+  iconClick: {
+    width: 60,
+    height: 60,
+    backgroundColor: '#F4BF40',
+    borderRadius: 150,
+    position: 'absolute',
+    right: 15,
+    bottom: '15%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  containerSearchEmpty: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  emptyImage: {width: 50, height: 50},
+  textEmpty: {textAlign: 'center', marginTop: 10},
 });
 
 export default styles;
