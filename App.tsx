@@ -16,7 +16,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AddNewDiaryScreen from './screen/addNewDiary/AddNewDiary';
 import MasterLayout from './screen/masterLayout/MasterLayout';
 import SeachAdvancedDemo from './screen/searchAdvancedDemo/seachAdvancedDemo';
-import ManageDoan from './screen/manageDoan/manageDoan';
+import ManageGroup from './screen/manageGroup/manageGroup';
+import SeachAdvanced from './component/SearchAdvance/searchAdvanced';
+import ManageGroupDetail from './screen/manageGroupDetail/manageGroupDetail';
 
 // const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,19 +29,15 @@ const App = () => {
     MasterLayout(AddNewDiaryScreen());
   const ConvertSeachAdvancedLayout = () => MasterLayout(SeachAdvancedDemo());
 
-  const ConvertManageDoanLayout = () => MasterLayout(ManageDoan());
+  const ConvertManageDoanLayout = () => MasterLayout(ManageGroup());
   return (
-    <NavigationContainer>
-      <Tab.Navigator screenOptions={{headerShown: false}}>
-        {/* <Tab.Screen
-          name="Search Advanced"
-          component={ConvertSeachAdvancedLayout}
-        />
-        <Tab.Screen name="Diary" component={ConvertAddNewDiaryScreenLayout} />
-        <Tab.Screen name="Home" component={ConvertSearchScreenLayout} /> */}
-        <Tab.Screen name="Manage Doan" component={ConvertManageDoanLayout} />
-      </Tab.Navigator>
-    </NavigationContainer>
+
+    <ManageGroupDetail/>
+      // <ConvertManageDoanLayout/>
+
+    // <NavigationContainer>
+          
+    // </NavigationContainer>
   );
 };
 
