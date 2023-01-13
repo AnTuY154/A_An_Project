@@ -31,10 +31,11 @@ const App = () => {
   const ConvertManageDoanLayout = () => MasterLayout(ManageDoan());
   return (
     <NavigationContainer>
-      <Tab.Navigator screenOptions={{headerShown: false}}>
+      {/* <Tab.Navigator screenOptions={{headerShown: false}}>
         <Tab.Screen name="Manage Doan" component={ConvertManageDoanLayout} />
         <Tab.Screen name="ProblemArising" component={ProblemArising} />
-      </Tab.Navigator>
+      </Tab.Navigator> */}
+      <ProblemArising />
     </NavigationContainer>
   );
 };
