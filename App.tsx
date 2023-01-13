@@ -17,6 +17,11 @@ import AddNewDiaryScreen from './screen/addNewDiary/AddNewDiary';
 import MasterLayout from './screen/masterLayout/MasterLayout';
 import SeachAdvancedDemo from './screen/searchAdvancedDemo/seachAdvancedDemo';
 import ManageGroup from './screen/manageGroup/manageGroup';
+import ProblemArising from './screen/poblemArising/ProblemArising';
+import {createStackNavigator} from '@react-navigation/stack';
+import ProblemArisingAdd from './screen/problemArising-add/ProblemArisingAdd';
+
+const Stack = createStackNavigator();
 import SeachAdvanced from './component/SearchAdvance/searchAdvanced';
 import ManageGroupDetail from './screen/manageGroupDetail/manageGroupDetail';
 
@@ -30,14 +35,21 @@ const App = () => {
   const ConvertSeachAdvancedLayout = () => MasterLayout(SeachAdvancedDemo());
 
   const ConvertManageDoanLayout = () => MasterLayout(ManageGroup());
+
+  function MyStack() {
+    return (
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="ProblemArising" component={ProblemArising} />
+        <Stack.Screen name="ProblemArisingAdd" component={ProblemArisingAdd} />
+      </Stack.Navigator>
+    );
+  }
+
   return (
-
-    <ManageGroupDetail/>
-      // <ConvertManageDoanLayout/>
-
-    // <NavigationContainer>
-          
-    // </NavigationContainer>
+    <NavigationContainer>
+      <MyStack />
+      {/* <ManageGroupDetail /> */}
+    </NavigationContainer>
   );
 };
 
