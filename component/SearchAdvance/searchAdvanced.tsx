@@ -22,6 +22,7 @@ const SeachAdvanced = () => {
     console.log('handleSheetChanges', index);
   }, []);
   const handleChange = (value: any) => {
+    console.log(value)
     setActiveSections(value);
   };
   const handleHeader = (
@@ -45,8 +46,9 @@ const SeachAdvanced = () => {
       <View style={styles.contentContainer}>
       <View style={{width: '100%', padding: 20}}>
       <Accordion
+        
         activeSections={activeSections}
-        sections={['Section 1']}
+        sections={['Section 1','Section 2','Section 3']}
         renderHeader={handleHeader}
         renderContent={() => <Text>123</Text>}
         onChange={handleChange}
