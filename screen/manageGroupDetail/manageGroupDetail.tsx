@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -8,13 +9,14 @@
  * @format
  */
 
-import {StyleSheet, SafeAreaView, View, Text, Button, ScrollView} from 'react-native';
-import React, {useCallback, useMemo, useRef, useState} from 'react';
+import { StyleSheet, SafeAreaView, View, Text, Button, ScrollView } from 'react-native';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import Accordion from 'react-native-collapsible/Accordion';
 import BottomSheet from '@gorhom/bottom-sheet';
 import AccordionHeader from './component/accordionHeader';
 import Entypo from 'react-native-vector-icons/Entypo';
 import GroupInfoContent from './component/groupInfoContent';
+import { useNavigation } from '@react-navigation/native';
 
 export interface SectionsType {
   label: string;
@@ -22,28 +24,34 @@ export interface SectionsType {
   id: string
 }
 
-const ManageGroupDetail = () => {
+const ManageGroupDetail = (props) => {
+  const navigation = useNavigation();
+
+
+  const { route } = props['0'];
+  console.log(route.params.id)
+
   const [activeSections, setActiveSections] = useState<number[]>([0]);
 
   const sections: SectionsType[] = useMemo(() => {
     return [
       {
-        id:'1',
+        id: '1',
         icon: 'group_info',
         label: 'Thông tin Đoàn TT, Ktr, KT',
       },
       {
-        id:'2',
+        id: '2',
         icon: 'group_member',
         label: 'Thành viên Đoàn',
       },
-      {   
-        id:'3',
+      {
+        id: '3',
         icon: 'group_object',
         label: 'Đối tượng TT, KTr, KT',
       },
       {
-        id:'4',
+        id: '4',
         icon: 'group_problem',
         label: 'Nguồn gốc vấn đề',
       },
@@ -55,12 +63,13 @@ const ManageGroupDetail = () => {
   }, []);
 
   const handleChange = (value: any) => {
-    console.log(value);
     setActiveSections(value);
   };
 
   const handleBack = () => {
-    console.log('Back');
+
+    navigation.goBack();
+
   };
 
   const handleHeader = (
@@ -72,11 +81,11 @@ const ManageGroupDetail = () => {
     return <AccordionHeader content={content} isActive={isActive} />;
   };
 
-  const renderContent = (content:SectionsType, index:number, isActive:boolean, sections:SectionsType[]) => {
-      if(content.id === '1'){
-        return <GroupInfoContent isActive={isActive}/>
-      }
-      return <Text>123</Text>
+  const renderContent = (content: SectionsType, index: number, isActive: boolean, sections: SectionsType[]) => {
+    if (content.id === '1') {
+      return <GroupInfoContent isActive={isActive} />
+    }
+    return <Text>123</Text>
   }
 
   return (

@@ -9,11 +9,11 @@ import {
   Platform,
   Linking,
 } from 'react-native';
-import React, {useEffect, useMemo, useState} from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import RNFS from 'react-native-fs';
 import FileViewer from 'react-native-file-viewer';
 import GroupInfoItem from './groupInfoItem';
-import {styles as itemStyles} from './groupInfoItem';
+import { styles as itemStyles } from './groupInfoItem';
 
 interface GroupInfoContentType {
   isActive: boolean;
@@ -40,7 +40,7 @@ interface fileType {
   fileName: string;
 }
 
-const GroupInfoContent = ({isActive}: GroupInfoContentType) => {
+const GroupInfoContent = ({ isActive }: GroupInfoContentType) => {
   const [data, setData] = useState<GroupInfoDataType | null>(null);
 
   useEffect(() => {
@@ -139,7 +139,7 @@ const GroupInfoContent = ({isActive}: GroupInfoContentType) => {
   };
 
   const getFileIcon = (fileName: string) => {
-    console.log(fileName);
+
     const extension = fileName?.split('.')[1];
     switch (extension) {
       case 'doc':
@@ -175,7 +175,7 @@ const GroupInfoContent = ({isActive}: GroupInfoContentType) => {
         content={data.decisionNumber}
       />
 
-      <View style={{flexDirection: 'row'}}>
+      <View style={{ flexDirection: 'row' }}>
         <GroupInfoItem
           style={styles.flex_50}
           title="Từ ngày"
@@ -196,7 +196,7 @@ const GroupInfoContent = ({isActive}: GroupInfoContentType) => {
             style={styles.file_container}
             key={item.secretId}>
             {getFileIcon(item.fileName)}
-            <Text style={{color: '#007AD9', paddingHorizontal: 20}}>
+            <Text style={{ color: '#007AD9', paddingHorizontal: 20 }}>
               {item.fileName}
             </Text>
           </TouchableOpacity>
