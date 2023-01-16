@@ -15,18 +15,17 @@ import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
     const navigation = useNavigation();
-
     const handleChangeScreen = (screen: string) => {
-        navigation.navigate(screen);
+        navigation.navigate(screen as never);
     };
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => handleChangeScreen('ManageGroupList')}>
+            <TouchableOpacity onPress={() => handleChangeScreen('ManageGroup')}>
                 <Text> Quản lý đoàn</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => handleChangeScreen('ProblemArising')}>
+            <TouchableOpacity onPress={() => handleChangeScreen('MyStack')}>
                 <Text> Vấn đề phát sinh</Text>
             </TouchableOpacity>
         </View>
