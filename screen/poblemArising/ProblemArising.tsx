@@ -16,62 +16,151 @@ import ListProblem from './list-problem/ListProblem';
 import {useNavigation} from '@react-navigation/native';
 
 const ProblemArising = () => {
-  const data = [
+
+  const dataProblemArising = [
     {
       id: '1',
-      title: '1.VĐPS_305',
-      unit: 'Hà Nội, Bắc Giang',
-      unitPerson: 'B01 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
-      content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội ...',
-      status: 'Chưa xử lý',
-      iconStatus: 'active',
+      sourceProblem: '1.VĐPS_303',
+      typeProblem: 'Khiếu nại',
+      unitProblem: [
+        {
+          id: '1',
+          name: 'khoi co quan Thach That'
+        },
+          {
+          id: '2',
+          name: 'khoi co quan Thach That'
+        }
+      ],
+      title: 'don khieu nai CSKH',
+      job: 'Về việc tiếp nhận các khiếu nại đến CSKH',
+      field: 'B05 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
+      content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội dung',
+      imageList: [
+        {
+          id: '1',
+          image :'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345'
+        },
+        {
+          id: '2',
+          image :'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345'
+        }
+      ],
+      status: 'Chờ xem xét',
+      iconStatus: 'inactive',
     },
     {
       id: '2',
-      title: '2.VĐPS_405',
-      unit: 'Hà Nội, Bắc Giang',
-      unitPerson: 'B02 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
-      content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội ...',
+      sourceProblem: '2.VĐPS_303',
+      typeProblem: 'Khiếu nại',
+      unitProblem: [
+        {
+          id: '1',
+          name: 'khoi co quan Thach That'
+        },
+          {
+          id: '2',
+          name: 'khoi co quan Thach That'
+        }
+      ],
+      title: 'vss tra cong',
+      job: 'Về việc tiếp nhận các khiếu nại đến CSKH',
+      field: 'B05 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
+      content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội dung',
+      imageList: [
+        {
+          id: '1',
+          image :'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345'
+        },
+        {
+          id: '2',
+          image :'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345'
+        }
+      ],
       status: 'Chờ xem xét',
       iconStatus: 'inactive',
     },
     {
       id: '3',
-      title: '3.VĐPS_505',
-      unit: 'Hà Nội, Bắc Giang',
-      unitPerson: 'B03 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
-      content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội ...',
-      status: 'Thực hiện kiểm tra',
-      iconStatus: 'disable',
-    },
-    {
-      id: '4',
-      title: '4.VĐPS_605',
-      unit: 'Hà Nội, Bắc Giang',
-      unitPerson: 'B04 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
-      content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội ...',
-      status: 'Chưa xử lý',
-      iconStatus: 'active',
-    },
-    {
-      id: '5',
-      title: '5.VĐPS_705',
-      unit: 'Hà Nội, Bắc Giang',
-      unitPerson: 'B05 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
-      content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội ...',
+      sourceProblem: '3.VĐPS_303',
+      typeProblem: 'Khiếu nại',
+      unitProblem: [
+        {
+          id: '1',
+          name: 'khoi co quan Thach That'
+        },
+          {
+          id: '2',
+          name: 'khoi co quan Thach That'
+        }
+      ],
+      title: 'don khieu nai dep trai',
+      job: 'Về việc tiếp nhận các khiếu nại đến CSKH',
+      field: 'B05 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
+      content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội dung',
+      imageList: [
+        {
+          id: '1',
+          image :'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345'
+        },
+        {
+          id: '2',
+          image :'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345'
+        }
+      ],
       status: 'Chờ xem xét',
       iconStatus: 'inactive',
     },
-  ];
+    {
+      id: '4',
+      sourceProblem: '4.VĐPS_303',
+      typeProblem: 'Khiếu nại',
+      unitProblem: [
+        {
+          id: '1',
+          name: 'khoi co quan Thach That'
+        },
+          {
+          id: '2',
+          name: 'khoi co quan Thach That'
+        }
+      ],
+      title: 'quan doi nhan dan viet nam',
+      job: 'Về việc tiếp nhận các khiếu nại đến CSKH',
+      field: 'B05 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
+      content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội dung',
+      imageList: [
+        {
+          id: '1',
+          image :'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345'
+        },
+        {
+          id: '2',
+          image :'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345'
+        }
+      ],
+      status: 'Chờ xem xét',
+      iconStatus: 'inactive',
+    }
+  ]
 
   const [value, setValue] = useState('');
-  const [datalist, setDataList] = useState<any>(data);
+  const [datalist, setDataList] = useState<any>(dataProblemArising);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [indexData, setIndexData] = useState(0);
   const navigation = useNavigation();
 
   const onChangeText = (text: string) => {
-    const response = data.filter(item => {
-      if (item.title.includes(text) || item.unitPerson.includes(text)) {
+    const response = dataProblemArising.filter(item => {
+      if (item.title.includes(text) || item.sourceProblem.includes(text)) {
         return item;
       }
     });
@@ -81,10 +170,15 @@ const ProblemArising = () => {
 
   useEffect(() => {
     if (value == '') {
-      setDataList(data);
+      setDataList(dataProblemArising);
     }
   }, [value]);
 
+  const handleDelete = () => {
+    const response = datalist.filter((item,index) => index !== indexData)
+    setDataList(response);
+    setModalVisible(false)
+  }
 
   return (
     <View style={styles.container}>
@@ -107,7 +201,7 @@ const ProblemArising = () => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.clickRight}
-                onPress={() => setModalVisible(!isModalVisible)}>
+                onPress={() => handleDelete()}>
                 <Text style={styles.rightColor}>Có</Text>
               </TouchableOpacity>
             </View>
@@ -142,6 +236,8 @@ const ProblemArising = () => {
                 setModalVisible={setModalVisible}
                 isModalVisible={isModalVisible}
                 dataList={datalist}
+                setIndexData={setIndexData}
+                
               />
             ) : (
               <View style={styles.containerSearchEmpty}>

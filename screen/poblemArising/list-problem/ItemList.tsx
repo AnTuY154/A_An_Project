@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Image, Pressable, Text, View} from 'react-native';
 import images from '../../assets/images';
 import styles from '../styles';
+import { useNavigation } from '@react-navigation/native';
 
 const ItemList = ({item}) => {
-  console.log('item', item.item);
   const itemData = item.item;
+
+  const navigation = useNavigation();
+  const [checkBoxLongPress, setCheckboxLongPress] = useState(false)
+
   return (
+  
     <Pressable
       style={[styles.containerItem]}
-      onPress={() => console.log('pree')}>
+      key={item}
+      onLongPress={() => setCheckboxLongPress(!checkBoxLongPress)}
+      onPress={() => navigation.navigate('ProblemArisingDetail' as never, {item: itemData} as never)}>
       <View
         style={[
           {
@@ -19,8 +26,12 @@ const ItemList = ({item}) => {
             zIndex: 99,
           },
         ]}>
+          {
+            checkBoxLongPress &&<Text>sss</Text>
+
+          }
         <View style={styles.blockTitle}>
-          <Text style={[styles.titleHeaderBlock]}>{itemData.title}</Text>
+          <Text style={[styles.titleHeaderBlock]}>{itemData.sourceProblem}</Text>
 
           <Text
             style={[
@@ -37,10 +48,10 @@ const ItemList = ({item}) => {
         <View style={styles.blockItem}>
           <View style={styles.blockLeft}>
             <Text style={styles.unitBlock}>
-              Đơn vị phát sinh: {itemData.unit}
+              Đơn vị phát sinh: {itemData.unitProblem.map((item) => <Text>{item.name} ,  </Text>)}
             </Text>
             <Text style={styles.fieldBlock} numberOfLines={1}>
-              Lĩnh vực: {itemData.unitPerson}
+              Lĩnh vực: {itemData.field}
             </Text>
             <Text style={styles.contentBlock} numberOfLines={1}>
               Nội dung: {itemData.content}

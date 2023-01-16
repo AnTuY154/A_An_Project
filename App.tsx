@@ -20,6 +20,7 @@ import ManageGroup from './screen/manageGroup/manageGroup';
 import ProblemArising from './screen/poblemArising/ProblemArising';
 import {createStackNavigator} from '@react-navigation/stack';
 import ProblemArisingAdd from './screen/problemArising-add/ProblemArisingAdd';
+import ProblemArisingDetail from './screen/problemArising-detail/ProblemArisingDetail';
 
 const Stack = createStackNavigator();
 import SeachAdvanced from './component/SearchAdvance/searchAdvanced';
@@ -41,6 +42,8 @@ const App = () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="ProblemArising" component={ProblemArising} />
         <Stack.Screen name="ProblemArisingAdd" component={ProblemArisingAdd} />
+        <Stack.Screen name="ProblemArisingDetail" component={ProblemArisingDetail} />
+
       </Stack.Navigator>
     );
   }
