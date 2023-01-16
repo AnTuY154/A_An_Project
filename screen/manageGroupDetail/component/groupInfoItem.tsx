@@ -1,18 +1,5 @@
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
-import React, {useMemo, useState} from 'react';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Feather from 'react-native-vector-icons/Feather';
-import Entypo from 'react-native-vector-icons/Entypo';
-import {SectionsType} from '../manageGroupDetail';
+import {StyleSheet, View, Text} from 'react-native';
+import React from 'react';
 
 export interface GroupInfoItemType {
   title: string;
@@ -20,9 +7,9 @@ export interface GroupInfoItemType {
   style?: any;
 }
 
-const GroupInfoItem = ({title, content,style}: GroupInfoItemType) => {
+const GroupInfoItem = ({title, content, style}: GroupInfoItemType) => {
   return (
-    <View style={[styles.conatiner,style]}>
+    <View style={[styles.container, style]}>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.content}>{content}</Text>
     </View>
@@ -30,7 +17,7 @@ const GroupInfoItem = ({title, content,style}: GroupInfoItemType) => {
 };
 
 export const styles = StyleSheet.create({
-  conatiner: {
+  container: {
     paddingVertical: 5,
   },
   title: {

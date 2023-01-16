@@ -23,48 +23,79 @@ const AccordionHeader = ({isActive, content}: HeaderType) => {
   const icon = useMemo(() => {
     switch (content.icon) {
       case 'group_info':
-        return <MaterialCommunityIcons name='account-group-outline' color='red' size={25}/>
+        return (
+          <MaterialCommunityIcons
+            name="account-group-outline"
+            color="red"
+            size={25}
+          />
+        );
       case 'group_member':
-        return <MaterialCommunityIcons name='account-circle-outline' color='red' size={25}/>
+        return (
+          <MaterialCommunityIcons
+            name="account-circle-outline"
+            color="red"
+            size={25}
+          />
+        );
       case 'group_object':
-        return <MaterialIcons name='subject' color='red' size={25}/>
+        return <MaterialIcons name="subject" color="red" size={25} />;
       case 'group_problem':
-        return <Feather name='target'  color='red' size={25}/>
+        return <Feather name="target" color="red" size={25} />;
       default:
-        return <MaterialIcons name='subject' color='red' size={25}/>
+        return <MaterialIcons name="subject" color="red" size={25} />;
     }
   }, [content]);
 
   return (
-    <View style={[styles.container, isActive && styles.active_background]}>
+    <View style={[styles.container, isActive && styles.active]}>
       {icon}
       <Text style={styles.content}>{content.label}</Text>
-      <Entypo name={isActive ? 'chevron-up' : 'chevron-down'} size={20} color="red" />
+      <Entypo
+        name={isActive ? 'chevron-up' : 'chevron-down'}
+        size={20}
+        color="red"
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  active: {
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    backgroundColor: '#F3F3F3',
+  },
   container: {
     marginTop: 10,
     paddingHorizontal: 10,
     paddingVertical: 5,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF'
-  },
-  active_background: {
-    backgroundColor: '#F3F3F3'
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
+    borderWidth: 1,
+    borderColor: '#CFCFCF',
+    borderRadius: 8,
   },
   imge_icon: {
-      width: 20,
-      height: 20
+    width: 20,
+    height: 20,
   },
   content: {
     flex: 1,
     paddingLeft: 20,
     fontWeight: 'bold',
-    fontSize: 16
+    fontSize: 16,
   },
   search_icon: {
     padding: 3,
