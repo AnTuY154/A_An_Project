@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {Image, Pressable, Text, View} from 'react-native';
 import images from '../../assets/images';
 import styles from '../styles';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const ItemList = ({item}) => {
   const itemData = item.item;
 
   const navigation = useNavigation();
-  const [checkBoxLongPress, setCheckboxLongPress] = useState(false)
+  const [checkBoxLongPress, setCheckboxLongPress] = useState(false);
 
   return (
-  
     <Pressable
       style={[styles.containerItem]}
       key={item}
       onLongPress={() => setCheckboxLongPress(!checkBoxLongPress)}
-      onPress={() => navigation.navigate('ProblemArisingDetail' as never, {item: itemData} as never)}>
+      onPress={() =>
+        navigation.navigate(
+          'ProblemArisingDetail' as never,
+          {item: itemData} as never,
+        )
+      }>
       <View
         style={[
           {
@@ -26,12 +30,11 @@ const ItemList = ({item}) => {
             zIndex: 99,
           },
         ]}>
-          {
-            checkBoxLongPress &&<Text>sss</Text>
-
-          }
+      
         <View style={styles.blockTitle}>
-          <Text style={[styles.titleHeaderBlock]}>{itemData.sourceProblem}</Text>
+          <Text style={[styles.titleHeaderBlock]}>
+            {itemData.sourceProblem}
+          </Text>
 
           <Text
             style={[
@@ -46,9 +49,15 @@ const ItemList = ({item}) => {
           </Text>
         </View>
         <View style={styles.blockItem}>
+          <View style={{width: '10%', height: '100%'}}>
+            <Text>ssss</Text>
+          </View>
           <View style={styles.blockLeft}>
             <Text style={styles.unitBlock}>
-              Đơn vị phát sinh: {itemData.unitProblem.map((item) => <Text>{item.name} ,  </Text>)}
+              Đơn vị phát sinh:{' '}
+              {itemData.unitProblem.map(item => (
+                <Text>{item.name} , </Text>
+              ))}
             </Text>
             <Text style={styles.fieldBlock} numberOfLines={1}>
               Lĩnh vực: {itemData.field}

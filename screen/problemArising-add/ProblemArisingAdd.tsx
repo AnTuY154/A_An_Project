@@ -200,7 +200,6 @@ const ProblemArisingAdd = () => {
     }
   };
 
-  console.log('dataa', data);
   return (
     <View style={styles.container}>
       {loading && (
@@ -231,7 +230,7 @@ const ProblemArisingAdd = () => {
         animationIn="fadeIn"
         isVisible={isModalVisible}
         style={{
-          margin: 0, // This is the important style you need to set
+          margin: 0,
           alignItems: undefined,
           justifyContent: undefined,
         }}>

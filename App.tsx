@@ -25,6 +25,7 @@ import ProblemArisingDetail from './screen/problemArising-detail/ProblemArisingD
 const Stack = createStackNavigator();
 import SeachAdvanced from './component/SearchAdvance/searchAdvanced';
 import ManageGroupDetail from './screen/manageGroupDetail/manageGroupDetail';
+import SwipList from './screen/swip-list/SwipList';
 
 // const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -40,10 +41,14 @@ const App = () => {
   function MyStack() {
     return (
       <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="SwipList" component={SwipList} />
+
         <Stack.Screen name="ProblemArising" component={ProblemArising} />
         <Stack.Screen name="ProblemArisingAdd" component={ProblemArisingAdd} />
-        <Stack.Screen name="ProblemArisingDetail" component={ProblemArisingDetail} />
-
+        <Stack.Screen
+          name="ProblemArisingDetail"
+          component={ProblemArisingDetail}
+        />
       </Stack.Navigator>
     );
   }
