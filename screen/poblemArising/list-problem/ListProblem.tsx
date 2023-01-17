@@ -32,16 +32,12 @@ const ListProblem: React.FC<TypeListProblem> = ({
   const isFocused = useIsFocused();
   const [click, setClick] = useState(false);
 
-
-  useEffect(() => {
-    setClick(false)
-  }, [isFocused])
   const renderHiddenItem = (itemData, index) => {
     const item = itemData.item    
 
     return (
       <View style={styles.qaContainer} key={item}>
-        {item.status == 'Chờ xem xét' && click && (
+        {item.status == 'Chờ xem xét'  && (
           <View style={styles.qaContainer}>
             <TouchableOpacity style={[styles.blockSwipe, styles.borderSwipe]}>
               <Image source={images.gitDiff} style={styles.imageIcon} />
@@ -60,7 +56,7 @@ const ListProblem: React.FC<TypeListProblem> = ({
           </View>
         )}
 
-        {item.status == 'Chờ xử lý' && click && (
+        {item.status == 'Chờ xử lý'  && (
           <TouchableOpacity
             style={[styles.blockSwipe, styles.backgroundCancelProblem]}>
             <Image source={images.gitDiff} style={styles.imageIcon} />
@@ -70,12 +66,6 @@ const ListProblem: React.FC<TypeListProblem> = ({
       </View>
     );
   };
-
-  useEffect(() => {
-    if(distance == 0) {
-      setClick(false)
-    }
-  },[distance])
 
   return (
     <SwipeListView
@@ -88,6 +78,8 @@ const ListProblem: React.FC<TypeListProblem> = ({
       previewOpenValue={-40}
       previewOpenDelay={3000}
       disableRightSwipe={true}
+      swipeToClosePercent={90}
+      onRowClose={() => setClick(false)}
       swipeGestureBegan={(itemView) => {
         setClick(true)
         const response = dataList.map((itemData, index) => {
@@ -100,7 +92,7 @@ const ListProblem: React.FC<TypeListProblem> = ({
           setDistance(-240)
         }
         else if(responseFormat[0].status == 'Chờ xử lý'){
-          setDistance(-100)
+          setDistance(-90)
         }else{
           console.log('rrr');
           
