@@ -1,37 +1,35 @@
 import React, {useState} from 'react';
-import {Image, Pressable, Text, View} from 'react-native';
+import {Image, Pressable, Text, TouchableOpacity, View} from 'react-native';
 import images from '../../assets/images';
 import styles from '../styles';
 import {useNavigation} from '@react-navigation/native';
+import CheckBox from '@react-native-community/checkbox';
 
-const ItemList = ({item}) => {
+const ItemList = ({item, setClick, setCheckboxLongPress, checkBoxLongPress, handleCheckedItem}) => {
   const itemData = item.item;
 
   const navigation = useNavigation();
-  const [checkBoxLongPress, setCheckboxLongPress] = useState(false);
 
   return (
-    <Pressable
-      style={[styles.containerItem]}
-      key={item}
-      onLongPress={() => setCheckboxLongPress(!checkBoxLongPress)}
+    <TouchableOpacity
+      style={[styles.containerItem, {backgroundColor: itemData.isChecked ? '#FFDFDF' : 'white'}]}
+      key={itemData.key}
+      onLongPress={() => (setClick(false), setCheckboxLongPress(!checkBoxLongPress))}
       onPress={() =>
-        navigation.navigate(
+        (setClick(false),navigation.navigate(
           'ProblemArisingDetail' as never,
           {item: itemData} as never,
-        )
+        ))
       }>
       <View
-        style={[
-          {
-            backgroundColor: 'white',
-            width: '100%',
-            height: '100%',
-            zIndex: 99,
-          },
-        ]}>
-      
-        <View style={styles.blockTitle}>
+        style={styles.blockList}>
+      <View style={styles.listLeft}>
+       {
+        checkBoxLongPress &&  <CheckBox value={itemData.isChecked} onValueChange={() =>handleCheckedItem(itemData.id) } />
+       }
+      </View>
+      <View style={styles.listRight}>
+      <View style={styles.blockTitle}>
           <Text style={[styles.titleHeaderBlock]}>
             {itemData.sourceProblem}
           </Text>
@@ -49,9 +47,6 @@ const ItemList = ({item}) => {
           </Text>
         </View>
         <View style={styles.blockItem}>
-          <View style={{width: '10%', height: '100%'}}>
-            <Text>ssss</Text>
-          </View>
           <View style={styles.blockLeft}>
             <Text style={styles.unitBlock}>
               Đơn vị phát sinh:{' '}
@@ -81,7 +76,8 @@ const ItemList = ({item}) => {
           </View>
         </View>
       </View>
-    </Pressable>
+      </View>
+    </TouchableOpacity>
   );
 };
 

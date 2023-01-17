@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   Image,
@@ -9,15 +9,15 @@ import {
   View,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import ValueInputList from './components/valueInput-list/ValueInputList';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import CheckBox from '@react-native-community/checkbox';
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import PopupBottomSheet from './components/PopupBottomSheet/PopupBottomSheet';
-import {formValidationSchema} from '../utils/Utils';
+import { formValidationSchema } from '../utils/Utils';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Modal from 'react-native-modal';
 import CameraOption from './components/CameraOption/CameraOption';
@@ -28,9 +28,9 @@ interface TypeData {
   value: string;
 }
 
-const ProblemArisingDetail = ({route}) => {
+const ProblemArisingDetail = ({ route }) => {
   const navigation = useNavigation();
-  const {item} = route.params;
+  const { item } = route.params;
   const [openList, setOpenList] = useState<boolean>(false);
   const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
   const [updateDocument, setUpdateDocument] = useState<boolean>(false);
@@ -38,15 +38,15 @@ const ProblemArisingDetail = ({route}) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
   const [items, setItems] = useState([
-    {label: 'Apple', value: 'apple', isSelected: true},
-    {label: 'Banana', value: 'banana'},
+    { label: 'Apple', value: 'apple', isSelected: true },
+    { label: 'Banana', value: 'banana' },
   ]);
 
   const [openField, setOpenField] = useState(false);
   const [valueField, setValueField] = useState('');
   const [itemsField, setItemsField] = useState([
-    {label: 'Apple', value: 'apple', isSelected: true},
-    {label: 'Banana', value: 'banana'},
+    { label: 'Apple', value: 'apple', isSelected: true },
+    { label: 'Banana', value: 'banana' },
   ]);
   const [imageListView, setImageListView] = useState(item.imageList);
 
@@ -56,6 +56,8 @@ const ProblemArisingDetail = ({route}) => {
   const [data, setData] = useState<TypeData[]>([]);
 
   const handleDelete = id => {
+    console.log('iddd', id)
+    console.log('imag list', imageListView)
     const response = imageListView.filter((item, index) => index !== id);
     console.log('response', response);
     setImageListView(response);
@@ -70,7 +72,7 @@ const ProblemArisingDetail = ({route}) => {
 
   return (
     <>
-      <View style={{zIndex: 99}}>
+      <View style={{ zIndex: 99 }}>
         <Toast />
       </View>
       <ScrollView style={styles.container}>
@@ -91,7 +93,7 @@ const ProblemArisingDetail = ({route}) => {
               job: item.job,
               content: item.content,
             }}
-            onSubmit={(values, {setSubmitting}) => {
+            onSubmit={(values, { setSubmitting }) => {
               console.log('valkuesss', values);
               //imageListView
               //loại vấn đề: value
@@ -102,7 +104,7 @@ const ProblemArisingDetail = ({route}) => {
                 text1: 'Hello',
                 text2: 'This is some something 👋',
               });
-             
+
 
               setTimeout(() => {
                 setSubmitting(false);
@@ -141,7 +143,7 @@ const ProblemArisingDetail = ({route}) => {
                 />
                 <View>
                   <Text style={styles.sourceProblemTitle}>
-                    Loại vấn đề <Text style={{color: 'red'}}>*</Text>
+                    Loại vấn đề <Text style={{ color: 'red' }}>*</Text>
                   </Text>
                   <DropDownPicker
                     open={open}
@@ -150,10 +152,10 @@ const ProblemArisingDetail = ({route}) => {
                     setOpen={setOpen}
                     setValue={setValue}
                     setItems={setItems}
-                    style={{minHeight: 45, borderColor: '#E1E1E1'}}
-                    dropDownContainerStyle={{borderColor: '#E1E1E1'}}
+                    style={{ minHeight: 45, borderColor: '#E1E1E1' }}
+                    dropDownContainerStyle={{ borderColor: '#E1E1E1' }}
                     placeholder={'-Chọn-'}
-                    placeholderStyle={{color: 'black'}}
+                    placeholderStyle={{ color: 'black' }}
                     disabled={updateDocument == false ? false : true}
                   />
                 </View>
@@ -177,11 +179,11 @@ const ProblemArisingDetail = ({route}) => {
                     <FlatList
                       data={item.unitProblem}
                       nestedScrollEnabled
-                      renderItem={({item, index}) => {
+                      renderItem={({ item, index }) => {
                         return (
                           <View style={styles.blockCheckbox}>
                             <CheckBox disabled={false} value={true} />
-                            <Text style={{color: '#2F2F2F'}}>{item.name}</Text>
+                            <Text style={{ color: '#2F2F2F' }}>{item.name}</Text>
                           </View>
                         );
                       }}
@@ -206,7 +208,7 @@ const ProblemArisingDetail = ({route}) => {
                 />
                 <View>
                   <Text style={styles.sourceProblemTitle}>
-                    Lĩnh vực <Text style={{color: 'red'}}>*</Text>
+                    Lĩnh vực <Text style={{ color: 'red' }}>*</Text>
                   </Text>
                   <DropDownPicker
                     open={openField}
@@ -215,8 +217,8 @@ const ProblemArisingDetail = ({route}) => {
                     setOpen={setOpenField}
                     setValue={setValueField}
                     setItems={setItemsField}
-                    style={{minHeight: 45, borderColor: '#E1E1E1'}}
-                    dropDownContainerStyle={{borderColor: '#E1E1E1'}}
+                    style={{ minHeight: 45, borderColor: '#E1E1E1' }}
+                    dropDownContainerStyle={{ borderColor: '#E1E1E1' }}
                     disabled={updateDocument ? false : true}
                   />
                 </View>
@@ -240,7 +242,7 @@ const ProblemArisingDetail = ({route}) => {
                     </TouchableOpacity>
                   )}
                 </View>
-                <View style={{width: '100%', height: 200}}>
+                <View style={{ width: '100%', height: 200, marginBottom: 20 }}>
                   <FlatList
                     data={imageListView}
                     nestedScrollEnabled
@@ -248,9 +250,10 @@ const ProblemArisingDetail = ({route}) => {
                       height: '100%',
                       width: '100%',
                     }}
-                    renderItem={({item, index}) => {
+                    renderItem={({ item, index }) => {
                       return (
                         <TouchableOpacity
+                        key={item.uri}
                           style={styles.containerImage}
                           onPress={() => (
                             setValueImageShow(item), setModalImage(!modalImage)
@@ -291,19 +294,22 @@ const ProblemArisingDetail = ({route}) => {
                     }}
                   />
                 </View>
-                <TouchableOpacity
-                  onPress={handleSubmit}
-                  style={{
-                    width: '100%',
-                    height: 30,
-                    backgroundColor: '#D9D9D9',
-                    justifyContent: 'center',
-                    marginTop: 20,
-                    alignItems: 'center',
-                    // marginBottom: 100,
-                  }}>
-                  <Text style={{color: 'black'}}>Cập nhật</Text>
-                </TouchableOpacity>
+                {
+                  updateDocument && <TouchableOpacity
+                    onPress={handleSubmit}
+                    style={{
+                      width: '100%',
+                      height: 30,
+                      backgroundColor: '#D9D9D9',
+                      justifyContent: 'center',
+                      marginTop: 20,
+                      alignItems: 'center',
+                      // marginBottom: 100,
+                    }}>
+                    <Text style={{ color: 'black' }}>Cập nhật</Text>
+                  </TouchableOpacity>
+
+                }
 
                 <CameraOption
                   setModalVisible={setModalVisible}

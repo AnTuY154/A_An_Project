@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#D9D9D9',
+    marginBottom: 10
   },
   inputSource: {
     width: '100%',

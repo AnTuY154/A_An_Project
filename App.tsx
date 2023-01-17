@@ -41,7 +41,7 @@ const App = () => {
   function MyStack() {
     return (
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="SwipList" component={SwipList} />
+        {/* <Stack.Screen name="SwipList" component={SwipList} /> */}
 
         <Stack.Screen name="ProblemArising" component={ProblemArising} />
         <Stack.Screen name="ProblemArisingAdd" component={ProblemArisingAdd} />

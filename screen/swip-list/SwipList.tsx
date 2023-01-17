@@ -54,9 +54,20 @@ const SwipList = () => {
         previewOpenValue={-40}
         previewOpenDelay={3000}
         onRowDidOpen={onRowDidOpen}
+        swipeGestureBegan={(item) => {
+          console.log('itt', item)
+          const response = listData.map((itemData,index) => {
+            console.log('index', index)
+            if(Number(index) == Number(item)){
+              return itemData;
+            }
+          } );
+          const responseFormat = response.filter((itemFormat) => itemFormat)
+          console.log('response', responseFormat)
+        }}
       />
       {/* <Text>sdsd</Text> */}
-    </View>
+    </View> 
   );
 };
 
