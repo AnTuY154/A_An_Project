@@ -27,6 +27,7 @@ import {useNavigation} from '@react-navigation/native';
 import GroupMemberContent from './component/groupMemberContent';
 import GroupObjectContent from './component/groupObjectContent';
 import GroupProblemContent from './component/groupProblemContent';
+import Header from '../../component/header/header';
 
 export interface SectionsType {
   label: string;
@@ -105,7 +106,8 @@ const ManageGroupDetail = props => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      <Header label="Chi tiết đoàn" />
+      {/* <View style={styles.header}>
         <Entypo
           onPress={handleBack}
           style={styles.back_icon}
@@ -115,7 +117,7 @@ const ManageGroupDetail = props => {
         />
 
         <Text style={styles.header_text}>Chi tiết Đoàn</Text>
-      </View>
+      </View> */}
       <ScrollView style={styles.body}>
         <Accordion
           activeSections={activeSections}
@@ -157,7 +159,7 @@ const styles = StyleSheet.create({
   body: {
     marginBottom: 20,
     width: '100%',
-    height: 'auto',
+    height: '100%',
     backgroundColor: '#F6F5FB',
     paddingHorizontal: 20,
   },

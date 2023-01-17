@@ -9,6 +9,8 @@ import {
   Platform,
   Linking,
   ActivityIndicator,
+  Dimensions,
+  ScrollView,
 } from 'react-native';
 import React, {useEffect, useMemo, useState} from 'react';
 import RNFS from 'react-native-fs';
@@ -194,7 +196,7 @@ const GroupInfoContent = ({isActive}: GroupInfoContentType) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {data ? (
         <>
           <GroupInfoItem title="Mã đoàn" content={data.code} />
@@ -242,20 +244,21 @@ const GroupInfoContent = ({isActive}: GroupInfoContentType) => {
       ) : (
         <ActivityIndicator size="small" color="#0000ff" />
       )}
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: 0,
     backgroundColor: 'white',
     borderWidth: 1,
     borderColor: '#CFCFCF',
     borderTopWidth: 0,
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
+    maxHeight: Dimensions.get('window').height / 2,
   },
   flex_50: {
     flexBasis: '50%',

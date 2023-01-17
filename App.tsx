@@ -28,6 +28,9 @@ const HomeStack = createStackNavigator();
 import ManageGroupDetail from './screen/manageGroupDetail/manageGroupDetail';
 import SwipList from './screen/swip-list/SwipList';
 import Home from './screen/homeScreen/homeScreen';
+import ProblemDetail from './screen/manageGroupDetail/component/groupTabProblemDetail';
+// import GroupTabGroupProblem from './screen/manageGroupDetail/component/groupTabGroupProblem';
+import GroupProblemDetail from './screen/manageGroupDetail/component/groupTabGroupProblemDetail';
 
 // const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -37,7 +40,13 @@ const App = () => {
   const ConvertManageGroupDetailLayout: any = MasterLayout(props => (
     <ManageGroupDetail {...props} />
   ));
+  const ConvertProblemDetailLayout: any = MasterLayout(props => (
+    <ProblemDetail {...props} />
+  ));
 
+  const ConvertGroupProblemDetailLayout: any = MasterLayout(props => (
+    <GroupProblemDetail {...props} />
+  ));
   function MyStackNavigator() {
     return (
       <Stack.Navigator screenOptions={{headerShown: false}}>
@@ -61,6 +70,14 @@ const App = () => {
         <GroupStack.Screen
           name="ManageGroupDetail"
           component={ConvertManageGroupDetailLayout}
+        />
+        <GroupStack.Screen
+          name="ManageGroupTabProblemDetail"
+          component={ConvertProblemDetailLayout}
+        />
+        <GroupStack.Screen
+          name="ManageGroupTabGroupProblemDetail"
+          component={ConvertGroupProblemDetailLayout}
         />
       </GroupStack.Navigator>
     );

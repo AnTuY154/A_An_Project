@@ -4,7 +4,6 @@ import {
   Text,
   TouchableWithoutFeedback,
   Animated,
-  Dimensions,
   ScrollView,
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
