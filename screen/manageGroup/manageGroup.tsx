@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable prettier/prettier */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -8,16 +10,17 @@
  * @format
  */
 
-import {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, TextInput, Image, FlatList} from 'react-native';
-import React, {useCallback} from 'react';
+import { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, TextInput, Image, FlatList } from 'react-native';
+import React, { useCallback } from 'react';
 import Header from './component/header';
 import Icon from 'react-native-vector-icons/AntDesign';
-import GroupItem, {GroupItemType} from './component/groupItem';
-import {debounce} from 'lodash';
-import {v4 as uuidv4} from 'uuid';
+import GroupItem, { GroupItemType } from './component/groupItem';
+import { debounce } from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
+import { useNavigation } from '@react-navigation/native';
 
-const defaultList:GroupItemType[] = [
+const defaultList: GroupItemType[] = [
   {
     id: '1',
     groupName: 'Đoàn kiểm tra Hà Nội, Bắc Giang',
@@ -99,9 +102,11 @@ const defaultList:GroupItemType[] = [
     timeEnd: '04/12/2022',
     timeStart: '04/11/2022',
   },
-]
+];
 
 const ManageGroup = () => {
+  const navigation = useNavigation();
+
   const [listGroup, setListGroup] = useState<GroupItemType[]>([]);
   const [page, setPage] = useState<number>(0);
   const [refreshing, setRefreshing] = useState<boolean>(false);
@@ -112,7 +117,7 @@ const ManageGroup = () => {
     setListGroup(defaultList);
   }, []);
 
-  const handleRenderItem = ({item, index}: any) => {
+  const handleRenderItem = ({ item, index }: any) => {
     const renderGroup: GroupItemType = item;
     return <GroupItem {...renderGroup} index={index + 1} />;
   };
@@ -205,7 +210,7 @@ const ManageGroup = () => {
           timeStart: '04/11/2022',
         },
       ]);
-    }else{
+    } else {
       setListGroup(defaultList);
     }
   };
@@ -213,13 +218,18 @@ const ManageGroup = () => {
   const handlerDebounce = useCallback(debounce(handleSearchApi, 300), []);
 
   const handleInputChange = (value: string) => {
-    setSearchValue(value)
+    setSearchValue(value);
     handlerDebounce(value);
   };
 
   return (
     <View style={styles.container}>
-      <Header label="Quản lý đoàn" backAction={() => {}} />
+      <Header
+        label="Quản lý đoàn"
+        backAction={() => {
+          navigation.goBack();
+        }}
+      />
       <View style={styles.body}>
         <View style={styles.search_container}>
           <Icon name="search1" size={20} />
@@ -243,7 +253,7 @@ const ManageGroup = () => {
             </>
           ) : (
             <FlatList
-              style={{width: '100%', height: '85%'}}
+              style={{ width: '100%', height: '85%' }}
               data={listGroup}
               renderItem={handleRenderItem}
               keyExtractor={item => item.id}

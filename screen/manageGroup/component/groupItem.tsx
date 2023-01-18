@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -8,8 +9,9 @@
  * @format
  */
 
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useCallback} from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React, { useCallback } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 export interface GroupItemType {
   name: string;
@@ -32,6 +34,8 @@ const GroupItem = ({
   timeStart,
   index,
 }: GroupItemType) => {
+  const navigation = useNavigation();
+
   const convertStatus = (status: 'Completed' | 'InProgress') => {
     switch (status) {
       case 'Completed':
@@ -42,22 +46,22 @@ const GroupItem = ({
   };
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={() => { navigation.navigate('ManageGroupDetail', { id: id }) }} style={styles.container}>
       <View style={styles.flex_row}>
-        <Text style={[{flex: 1}, styles.text_bold]}>{`${index}.${name}`}</Text>
+        <Text style={[{ flex: 1 }, styles.text_bold]}>{`${index}.${name}`}</Text>
         <Text style={styles.text_bold}>{`${timeStart} - ${timeEnd}`}</Text>
       </View>
       <View style={styles.flex_row}>
-        <Text style={{flex: 1}}>{`Đoàn: ${groupName}`}</Text>
+        <Text style={{ flex: 1 }}>{`Đoàn: ${groupName}`}</Text>
         {convertStatus(status)}
       </View>
       <View style={styles.flex_row}>
         <Text
-          style={{width: '80%'}}
+          style={{ width: '80%' }}
           numberOfLines={1}
           ellipsizeMode="tail">{`Đơn vị chủ trì: ${host}`}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

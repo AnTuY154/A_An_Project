@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -16,9 +17,9 @@ import {
 import React from 'react';
 
 const MasterLayout = (Component: any) => {
-  return (
+  return (...props) => (
     <SafeAreaView style={styles.screen_container}>
-      <View style={styles.screen_container}>{Component}</View>
+      <View style={styles.screen_container}><Component {...props} /></View>
     </SafeAreaView>
   );
 };
