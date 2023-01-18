@@ -46,7 +46,7 @@ const GroupItem = ({
   };
 
   return (
-    <TouchableOpacity onPress={() => { navigation.navigate('ManageGroupDetail', { id: id }) }} style={styles.container}>
+    <TouchableOpacity onPress={() => { navigation.navigate('ManageGroupDetail' as never, { id: id } as never) }} style={styles.container}>
       <View style={styles.flex_row}>
         <Text style={[{ flex: 1 }, styles.text_bold]}>{`${index}.${name}`}</Text>
         <Text style={styles.text_bold}>{`${timeStart} - ${timeEnd}`}</Text>

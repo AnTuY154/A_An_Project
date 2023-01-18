@@ -9,29 +9,34 @@
  * @format
  */
 
-import { StyleSheet, SafeAreaView, View, Text, Button, ScrollView } from 'react-native';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  Text,
+  Button,
+  ScrollView,
+} from 'react-native';
+import React, {useCallback, useMemo, useState} from 'react';
 import Accordion from 'react-native-collapsible/Accordion';
-import BottomSheet from '@gorhom/bottom-sheet';
 import AccordionHeader from './component/accordionHeader';
-import Entypo from 'react-native-vector-icons/Entypo';
 import GroupInfoContent from './component/groupInfoContent';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import GroupMemberContent from './component/groupMemberContent';
+import GroupObjectContent from './component/groupObjectContent';
+import GroupProblemContent from './component/groupProblemContent';
+import Header from '../../component/header/header';
 
 export interface SectionsType {
   label: string;
   icon: string;
-  id: string
+  id: string;
 }
 
-const ManageGroupDetail = (props) => {
+const ManageGroupDetail = props => {
   const navigation = useNavigation();
 
-
-  const { route } = props['0'];
-  console.log(route.params.id)
-
-  const [activeSections, setActiveSections] = useState<number[]>([0]);
+  const [activeSections, setActiveSections] = useState<number[]>([3]);
 
   const sections: SectionsType[] = useMemo(() => {
     return [
@@ -63,13 +68,12 @@ const ManageGroupDetail = (props) => {
   }, []);
 
   const handleChange = (value: any) => {
+    console.log(value);
     setActiveSections(value);
   };
 
   const handleBack = () => {
-
     navigation.goBack();
-
   };
 
   const handleHeader = (
@@ -81,26 +85,26 @@ const ManageGroupDetail = (props) => {
     return <AccordionHeader content={content} isActive={isActive} />;
   };
 
-  const renderContent = (content: SectionsType, index: number, isActive: boolean, sections: SectionsType[]) => {
+  const renderContent = (
+    content: SectionsType,
+    index: number,
+    isActive: boolean,
+    sections: SectionsType[],
+  ) => {
     if (content.id === '1') {
-      return <GroupInfoContent isActive={isActive} />
+      return <GroupInfoContent isActive={isActive} />;
+    } else if (content.id === '2') {
+      return <GroupMemberContent isActive={isActive} />;
+    } else if (content.id === '3') {
+      return <GroupObjectContent isActive={isActive} />;
+    } else {
+      return <GroupProblemContent isActive={isActive} />;
     }
-    return <Text>123</Text>
-  }
+  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Entypo
-          onPress={handleBack}
-          style={styles.back_icon}
-          name="chevron-left"
-          size={24}
-          color="black"
-        />
-
-        <Text style={styles.header_text}>Chi tiết Đoàn</Text>
-      </View>
+      <Header label="Chi tiết đoàn" />
       <ScrollView style={styles.body}>
         <Accordion
           activeSections={activeSections}
@@ -109,7 +113,6 @@ const ManageGroupDetail = (props) => {
           renderContent={renderContent}
           onChange={handleChange}
           underlayColor="transparent"
-          expandMultiple
         />
       </ScrollView>
     </View>
@@ -121,13 +124,11 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: '#F6F5FB',
-
   },
   header_text: {
     fontSize: 20,
     fontWeight: 'bold',
     color: 'black',
-
   },
   back_icon: {
     position: 'absolute',
@@ -140,11 +141,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   body: {
     marginBottom: 20,
     width: '100%',
+    height: '100%',
     backgroundColor: '#F6F5FB',
     paddingHorizontal: 20,
   },

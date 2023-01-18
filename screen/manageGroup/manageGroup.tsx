@@ -10,15 +10,23 @@
  * @format
  */
 
-import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Image, FlatList } from 'react-native';
-import React, { useCallback } from 'react';
+import {useEffect, useState} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Image,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
+import React, {useCallback} from 'react';
 import Header from './component/header';
 import Icon from 'react-native-vector-icons/AntDesign';
-import GroupItem, { GroupItemType } from './component/groupItem';
-import { debounce } from 'lodash';
-import { v4 as uuidv4 } from 'uuid';
-import { useNavigation } from '@react-navigation/native';
+import GroupItem, {GroupItemType} from './component/groupItem';
+import {debounce} from 'lodash';
+import {v4 as uuidv4} from 'uuid';
+import {useNavigation} from '@react-navigation/native';
 
 const defaultList: GroupItemType[] = [
   {
@@ -111,13 +119,14 @@ const ManageGroup = () => {
   const [page, setPage] = useState<number>(0);
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
+  const [isMore, setIsMore] = useState<boolean>(true);
 
   useEffect(() => {
     // call api here
     setListGroup(defaultList);
   }, []);
 
-  const handleRenderItem = ({ item, index }: any) => {
+  const handleRenderItem = ({item, index}: any) => {
     const renderGroup: GroupItemType = item;
     return <GroupItem {...renderGroup} index={index + 1} />;
   };
@@ -170,12 +179,14 @@ const ManageGroup = () => {
   };
 
   const handleLoadMore = async () => {
-    setRefreshing(true);
-    setPage(current => current + 1);
-    const loadMoreSource: any = await fakeCallApi();
-    const newData = loadMoreSource.dataSource;
-    setListGroup((current: any) => [...current, ...newData]);
-    setRefreshing(false);
+    if (isMore) {
+      setRefreshing(true);
+      setPage(current => current + 1);
+      const loadMoreSource: any = await fakeCallApi();
+      const newData = loadMoreSource.dataSource;
+      setListGroup((current: any) => [...current, ...newData]);
+      setRefreshing(false);
+    }
   };
 
   const handleSearchApi = (value: string) => {
@@ -253,13 +264,18 @@ const ManageGroup = () => {
             </>
           ) : (
             <FlatList
-              style={{ width: '100%', height: '85%' }}
+              style={{width: '100%', height: '85%'}}
               data={listGroup}
               renderItem={handleRenderItem}
               keyExtractor={item => item.id}
               onEndReached={handleLoadMore}
               onEndReachedThreshold={0}
               refreshing={refreshing}
+              ListFooterComponent={() =>
+                refreshing ? (
+                  <ActivityIndicator size="small" color="#0000ff" />
+                ) : null
+              }
             />
           )}
         </View>

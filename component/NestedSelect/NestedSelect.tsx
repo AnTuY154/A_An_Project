@@ -55,11 +55,10 @@ const NestedSelect = (
             (nested: NestedItemType) => {
               if (nested.value === nestedItem.value) {
                 // setShowValue()
-                if(checked){
-                  setNumberSelectedItem(current => current +1)
-                }else{
-                  setNumberSelectedItem(current => current -1)
-
+                if (checked) {
+                  setNumberSelectedItem(current => current + 1);
+                } else {
+                  setNumberSelectedItem(current => current - 1);
                 }
                 return {
                   ...nested,
@@ -126,10 +125,12 @@ const NestedSelect = (
         onPress={() => setOpen(current => !current)}
         style={styles.container}>
         <TextInput
-          
-          value={ `${numberSelectedItem ===0? '-Chọn-': `${numberSelectedItem} item is Selected` }`}
+          value={`${
+            numberSelectedItem === 0
+              ? '-Chọn-'
+              : `${numberSelectedItem} item is Selected`
+          }`}
           style={styles.input}
-   
           placeholder="-Chọn-"
           placeholderTextColor="black"
           editable={false}
@@ -174,7 +175,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     color: 'black',
-    paddingRight: 20
+    paddingRight: 20,
   },
 
   options: {

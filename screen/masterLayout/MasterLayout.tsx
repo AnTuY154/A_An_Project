@@ -9,17 +9,15 @@
  * @format
  */
 
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-} from 'react-native';
+import {StyleSheet, SafeAreaView, View} from 'react-native';
 import React from 'react';
 
 const MasterLayout = (Component: any) => {
   return (...props) => (
     <SafeAreaView style={styles.screen_container}>
-      <View style={styles.screen_container}><Component {...props} /></View>
+      <View style={styles.screen_container}>
+        <Component {...props} />
+      </View>
     </SafeAreaView>
   );
 };
