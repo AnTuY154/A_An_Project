@@ -366,7 +366,12 @@ const ProblemArising = () => {
 
         <View style={styles.containerContent}>
           <View style={styles.containerHeader}>
-            <Ionicons name="arrow-back" size={20} color={'white'} />
+            <Ionicons
+              name="arrow-back"
+              size={20}
+              color={'white'}
+              onPress={() => navigation.goBack()}
+            />
             <Text style={styles.titleHeader}>Vấn đề phát sinh</Text>
             <Text />
           </View>

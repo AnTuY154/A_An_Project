@@ -19,6 +19,7 @@ import {
   Image,
   FlatList,
   ActivityIndicator,
+  ImageBackground,
 } from 'react-native';
 import React, {useCallback} from 'react';
 import Header from './component/header';
@@ -235,49 +236,56 @@ const ManageGroup = () => {
 
   return (
     <View style={styles.container}>
-      <Header
-        label="Quản lý đoàn"
-        backAction={() => {
-          navigation.goBack();
-        }}
+      <ImageBackground
+        resizeMode="cover"
+        source={require('../assets/app_bg.png')}
+        style={styles.backgroundImage}
       />
-      <View style={styles.body}>
-        <View style={styles.search_container}>
-          <Icon name="search1" size={20} />
-          <TextInput
-            value={searchValue}
-            onChangeText={handleInputChange}
-            // editable={false}
-            placeholder="Tìm kiếm từ khoá"
-            style={styles.search_input}
-          />
-        </View>
-
-        <View style={styles.result_container}>
-          {listGroup.length <= 0 ? (
-            <>
-              <Image
-                style={styles.image}
-                source={require('../assets/meeting.jpg')}
-              />
-              <Text style={styles.text_no_data}>Không dữ liệu Đoàn</Text>
-            </>
-          ) : (
-            <FlatList
-              style={{width: '100%', height: '85%'}}
-              data={listGroup}
-              renderItem={handleRenderItem}
-              keyExtractor={item => item.id}
-              onEndReached={handleLoadMore}
-              onEndReachedThreshold={0}
-              refreshing={refreshing}
-              ListFooterComponent={() =>
-                refreshing ? (
-                  <ActivityIndicator size="small" color="#0000ff" />
-                ) : null
-              }
+      <View style={{zIndex: 99}}>
+        <Header
+          label="Quản lý đoàn"
+          backAction={() => {
+            navigation.goBack();
+          }}
+        />
+        <View style={styles.body}>
+          <View style={styles.search_container}>
+            <Icon name="search1" size={20} />
+            <TextInput
+              value={searchValue}
+              onChangeText={handleInputChange}
+              // editable={false}
+              placeholder="Tìm kiếm từ khoá"
+              style={styles.search_input}
             />
-          )}
+          </View>
+
+          <View style={styles.result_container}>
+            {listGroup.length <= 0 ? (
+              <>
+                <Image
+                  style={styles.image}
+                  source={require('../assets/meeting.jpg')}
+                />
+                <Text style={styles.text_no_data}>Không dữ liệu Đoàn</Text>
+              </>
+            ) : (
+              <FlatList
+                style={{width: '100%', height: '85%'}}
+                data={listGroup}
+                renderItem={handleRenderItem}
+                keyExtractor={item => item.id}
+                onEndReached={handleLoadMore}
+                onEndReachedThreshold={0}
+                refreshing={refreshing}
+                ListFooterComponent={() =>
+                  refreshing ? (
+                    <ActivityIndicator size="small" color="#0000ff" />
+                  ) : null
+                }
+              />
+            )}
+          </View>
         </View>
       </View>
     </View>
@@ -286,7 +294,6 @@ const ManageGroup = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'red',
     height: '100%',
   },
   body: {
@@ -322,6 +329,15 @@ const styles = StyleSheet.create({
   },
   text_no_data: {
     fontWeight: 'bold',
+  },
+  backgroundImage: {
+    flex: 1,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 1,
   },
 });
 
