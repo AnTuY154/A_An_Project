@@ -17,6 +17,17 @@ const ItemList = ({
 
   const navigation = useNavigation();
 
+  const checkStatus = () => {
+    if (String(itemData.iconStatus) === 'Chưa xử lý') {
+      return '#E7B401';
+    } else if (String(itemData.iconStatus) === 'Chờ xem xét') {
+      return '#858585';
+    } else if (String(itemData.iconStatus) === 'Thực hiện kiểm tra') {
+      return '#078CF3';
+    } else if (String(itemData.iconStatus) === 'Thực hiện khắc phục') {
+      return '#25A90F';
+    }
+  };
   return (
     <TouchableOpacity
       style={[
@@ -52,11 +63,16 @@ const ItemList = ({
             <Text
               style={[
                 styles.statusBlock,
-                itemData.iconStatus == 'inactive'
-                  ? styles.colorInactive
-                  : itemData.iconStatus == 'active'
-                  ? styles.colorActive
-                  : styles.colorDisable,
+                {
+                  color:
+                    itemData.status == 'Chưa xử lý'
+                      ? '#E7B401'
+                      : itemData.status == 'Chờ xem xét'
+                      ? '#858585'
+                      : itemData.status == 'Thực hiện kiểm tra'
+                      ? '#078CF3'
+                      : '#25A90F',
+                },
               ]}>
               {itemData.status}
             </Text>
@@ -80,11 +96,11 @@ const ItemList = ({
               <Text />
               <Image
                 source={
-                  itemData.iconStatus == 'active'
-                    ? images.active
-                    : itemData.iconStatus == 'inactive'
+                  itemData.status == 'Chờ xem xét'
                     ? images.inactive
-                    : images.disable
+                    : itemData.status == 'Chưa xử lý'
+                    ? images.process
+                    : images.implement
                 }
                 style={styles.imageStatus}
               />

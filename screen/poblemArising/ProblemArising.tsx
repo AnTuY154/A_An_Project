@@ -58,6 +58,7 @@ const ProblemArising = () => {
       status: 'Chờ xem xét',
       iconStatus: 'inactive',
       isChecked: false,
+      
     },
     {
       id: uuid(),
@@ -93,7 +94,7 @@ const ProblemArising = () => {
           value: '12345',
         },
       ],
-      status: 'Chờ xử lý',
+      status: 'Chưa xử lý',
       iconStatus: 'inactive',
       isChecked: false,
     },
@@ -169,7 +170,7 @@ const ProblemArising = () => {
           value: '12345',
         },
       ],
-      status: 'Chờ xem xét',
+      status: 'Thực hiện khắc phục',
       iconStatus: 'inactive',
       isChecked: false,
     },

@@ -10,6 +10,8 @@ const images = {
   delete: require('./delete.png'),
   giftDiff: require('./giftDiff.png'),
   sua: require('./sua.png'),
+  implement: require('./implement.png'),
+  process: require('./process.png'),
 };
 
 export default images;

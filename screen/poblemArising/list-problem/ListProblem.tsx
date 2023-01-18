@@ -77,7 +77,7 @@ const ListProblem: React.FC<TypeListProblem> = ({
           </View>
         )}
 
-        {item.status == 'Chờ xử lý' && click && (
+        {item.status == 'Chưa xử lý' && click && (
           <TouchableOpacity
             style={[styles.blockSwipe, styles.backgroundCancelProblem]}>
             <Image source={images.gitDiff} style={styles.imageIcon} />
@@ -180,7 +180,7 @@ const ListProblem: React.FC<TypeListProblem> = ({
           const responseFormat = response.filter(itemFormat => itemFormat);
           if (responseFormat[0].status == 'Chờ xem xét') {
             setDistance(-240);
-          } else if (responseFormat[0].status == 'Chờ xử lý') {
+          } else if (responseFormat[0].status == 'Chưa xử lý') {
             setDistance(-90);
           }
         }}
