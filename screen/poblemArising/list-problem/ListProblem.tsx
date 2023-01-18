@@ -1,5 +1,11 @@
 import React, {Dispatch, SetStateAction, useState} from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import images from '../../assets/images';
 import styles from '../styles';
@@ -16,7 +22,7 @@ interface TypeListProblem {
   distance: number;
   checkBoxLongPress: boolean;
   setCheckboxLongPress: Dispatch<SetStateAction<boolean>>;
-  handleCheckedItem:(id: any) => void
+  handleCheckedItem: (id: any) => void;
   setDataList: any;
 }
 
@@ -72,53 +78,59 @@ const ListProblem: React.FC<TypeListProblem> = ({
     );
   };
 
-
-  const data = {
-    id: uuid(),
-    key: uuid(),
-
-    sourceProblem: '10.VĐPS_303',
-    typeProblem: 'Khiếu nại',
-    unitProblem: [
-      {
-        id: '1',
-        name: 'khoi co quan Thach That',
-      },
-      {
-        id: '2',
-        name: 'khoi co quan Thach That',
-      },
-    ],
-    title: 'quan doi nhan dan viet nam',
-    job: 'Về việc tiếp nhận các khiếu nại đến CSKH',
-    field: 'B04 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
-    content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội dung',
-    imageList: [
-      {
-        id: '1',
-        image:
-          'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
-        value: '12345',
-      },
-      {
-        id: '2',
-        image:
-          'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
-        value: '12345',
-      },
-    ],
-    status: 'Chờ xem xét',
-    iconStatus: 'inactive',
-    isChecked: false,
-  };
-
   const handleLoadMore = () => {
-    setLoading(true);
+    try {
+      setLoading(true);
+      const data = {
+        id: uuid(),
+        key: uuid(),
 
-    setDataList(current => [...current, data]);
-    setLoading(false);
+        sourceProblem: '10.VĐPS_303',
+        typeProblem: 'Khiếu nại',
+        unitProblem: [
+          {
+            id: '1',
+            name: 'khoi co quan Thach That',
+          },
+          {
+            id: '2',
+            name: 'khoi co quan Thach That',
+          },
+        ],
+        title: 'quan doi nhan dan viet nam',
+        job: 'Về việc tiếp nhận các khiếu nại đến CSKH',
+        field: 'B04 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
+        content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội dung',
+        imageList: [
+          {
+            id: '1',
+            image:
+              'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+            value: '12345',
+          },
+          {
+            id: '2',
+            image:
+              'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+            value: '12345',
+          },
+        ],
+        status: 'Chờ xem xét',
+        iconStatus: 'inactive',
+        isChecked: false,
+      };
+      console.log('loading111', loading);
+
+      setTimeout(() => {
+        setLoading(false);
+        setDataList(current => [...current, data]);
+      }, 1000);
+    } catch (error) {
+      setLoading(false);
+    }
+    // setLoading(false);
   };
-
+  console.log('loading', loading);
   return (
     <View style={styles.fullWidth}>
       <SwipeListView
@@ -160,6 +172,18 @@ const ListProblem: React.FC<TypeListProblem> = ({
         }}
         onEndReached={() => handleLoadMore()}
         onEndReachedThreshold={0}
+        contentContainerStyle={{paddingBottom: 200}}
+        ListFooterComponent={() => {
+          return (
+            <>
+              {loading == true && (
+                <View style={styles.loading}>
+                  <ActivityIndicator size={'large'} color={'green'} />
+                </View>
+              )}
+            </>
+          );
+        }}
       />
     </View>
   );

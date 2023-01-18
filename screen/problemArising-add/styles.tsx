@@ -268,6 +268,12 @@ const styles = StyleSheet.create({
     alignItems: undefined,
     justifyContent: undefined,
   },
+  loadingMore: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 60,
+  },
 });
 
 export default styles;

@@ -211,9 +211,11 @@ const ProblemArisingAdd = () => {
 
   const handleLoareMore = () => {
     setLoadingMore(true);
-    const tmp = _.flattenDeep([...dataListCheckbox, dataAppend]);
-    setDataListCheckbox(tmp);
-    setLoadingMore(false);
+    setTimeout(() => {
+      setLoadingMore(false);
+      const tmp = _.flattenDeep([...dataListCheckbox, dataAppend]);
+      setDataListCheckbox(tmp);
+    }, 1000);
   };
 
   return (
@@ -436,6 +438,20 @@ const ProblemArisingAdd = () => {
                       }}
                       onEndReached={() => !loadingMore && handleLoareMore()}
                       onEndReachedThreshold={0.1}
+                      ListFooterComponent={() => {
+                        return (
+                          <>
+                            {loadingMore && (
+                              <View style={styles.loadingMore}>
+                                <ActivityIndicator
+                                  size={'large'}
+                                  color={'green'}
+                                />
+                              </View>
+                            )}
+                          </>
+                        );
+                      }}
                     />
                   </View>
                   <View>
