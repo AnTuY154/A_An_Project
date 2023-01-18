@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#000000',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    paddingLeft: 11,
+    paddingLeft: 15,
   },
   black: {
     color: '#000000',
@@ -249,6 +249,12 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   error: {color: 'red', marginVertical: 10},
+  checkbox: {
+    width: 20,
+    height: 20,
+    marginLeft: 3,
+    marginRight: 8,
+  },
 });
 
 export default styles;

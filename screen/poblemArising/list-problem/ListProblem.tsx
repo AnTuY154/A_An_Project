@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import {
   ActivityIndicator,
+  FlatList,
   Image,
   Text,
   TouchableOpacity,
@@ -87,7 +88,6 @@ const ListProblem: React.FC<TypeListProblem> = ({
     );
   };
 
-
   const handleLoadMore = () => {
     setLoading(true);
     const data = [
@@ -133,6 +133,12 @@ const ListProblem: React.FC<TypeListProblem> = ({
     setDataList(_.flattenDeep([...dataList, data]));
     setLoading(false);
   };
+  const [scrollPosition, setScrollPosition] = React.useState(0);
+
+  const handleScroll = event => {
+    let yOffset = event.nativeEvent.contentOffset.y / 90;
+    setScrollPosition(yOffset);
+  };
 
   return (
     <View
@@ -162,6 +168,8 @@ const ListProblem: React.FC<TypeListProblem> = ({
         onRowClose={() => setClick(false)}
         onRowOpen={() => setClick(true)}
         onRowDidOpen={() => setClick(true)}
+        onScroll={event => handleScroll(event)}
+        initialScrollIndex={scrollPosition}
         swipeGestureBegan={itemView => {
           setClick(true);
           const response = dataList.map((itemData, index) => {

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {
   Image,
   ImageBackground,
+  SafeAreaView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -333,127 +334,139 @@ const ProblemArising = () => {
         source={require('../assets/app_bg.png')}
         style={styles.backgroundImage}
       />
-      <Modal isVisible={isModalVisible}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalBlock}>
-            <Text style={styles.black}>
-              Bạn có chắc chắn muốn xóa vấn đề phát sinh không?
-            </Text>
-            <View style={styles.containerClick}>
-              <TouchableOpacity
-                style={styles.clickLeft}
-                onPress={() => setModalVisible(!isModalVisible)}>
-                <Text style={styles.leftColor}>Không</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.clickRight}
-                onPress={() => {
-                  if (checkBoxLongPress) {
-                    handleDeleteAll();
-                  } else {
-                    handleDelete();
-                  }
-                }}>
-                <Text style={styles.rightColor}>Có</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
-      <View style={styles.containerContent}>
-        <View style={styles.containerHeader}>
-          <Ionicons name="arrow-back" size={20} color={'white'} />
-          <Text style={styles.titleHeader}>Vấn đề phát sinh</Text>
-          <Text />
-        </View>
-
-        <View style={styles.containerList}>
-          <View style={styles.containerSearch}>
-            <View style={styles.blockSearch}>
-              <TextInput
-                multiline={false}
-                style={styles.inputSearch}
-                placeholder="Mã vấn đề, Đơn vị phát sinh, Lĩnh vực, Loại vấn đề, Từ khóa"
-                numberOfLines={1}
-                value={value}
-                onChangeText={(text: string) => onChangeText(text)}
-              />
-              <AntDesign name="search1" size={20} style={styles.iconSearch} />
-            </View>
-          </View>
-
-          <View style={styles.containerListData}>
-            {datalist.length > 0 ? (
-              <ListProblem
-                setModalVisible={setModalVisible}
-                isModalVisible={isModalVisible}
-                dataList={datalist}
-                setIndexData={setIndexData}
-                setDistance={setDistance}
-                distance={distance}
-                key={datalist}
-                setCheckboxLongPress={setCheckboxLongPress}
-                checkBoxLongPress={checkBoxLongPress}
-                handleCheckedItem={handleCheckedItem}
-                setDataList={setDataList}
-              />
-            ) : (
-              <View style={styles.containerSearchEmpty}>
-                <Image source={images.searchempty} style={styles.emptyImage} />
-                <Text style={styles.textEmpty}>
-                  Không có vấn đề phát sinh nào
-                </Text>
-              </View>
-            )}
-          </View>
-        </View>
-
-        {checkBoxLongPress && (
-          <View style={styles.clickAllContainer}>
-            <CheckBox value={checkAll} onValueChange={() => handleCheckAll()} />
-            <Text style={styles.colorBlack}>Chọn tất cả</Text>
-          </View>
-        )}
-        {!checkBoxLongPress ? (
-          <TouchableOpacity
-            onPress={() => navigation.navigate('ProblemArisingAdd' as never)}
-            style={styles.iconClick}>
-            <Ionicons name="add" color={'white'} size={35} />
-          </TouchableOpacity>
-        ) : (
-          <View
-            style={{
-              width: 60,
-              height: 80,
-              position: 'absolute',
-              bottom: '20%',
-              right: '2%',
-            }}>
-            <TouchableOpacity
-              onPress={() => setOptionClickAll(true)}
-              style={[styles.iconClick, {zIndex: 99}]}>
-              <Entypo name="dots-three-horizontal" color={'white'} size={35} />
-            </TouchableOpacity>
-            {optionClickAll && (
-              <View style={styles.popupClickAll}>
-                <TouchableOpacity style={styles.popupOptionAll}>
-                  <Image
-                    source={images.gitDiff}
-                    style={styles.imageOptionAll}
-                  />
-                  <Text style={styles.titleOptionAll}>Chuyển phân tích</Text>
+      <SafeAreaView style={styles.container}>
+        <Modal isVisible={isModalVisible}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalBlock}>
+              <Text style={styles.black}>
+                Bạn có chắc chắn muốn xóa vấn đề phát sinh không?
+              </Text>
+              <View style={styles.containerClick}>
+                <TouchableOpacity
+                  style={styles.clickLeft}
+                  onPress={() => setModalVisible(!isModalVisible)}>
+                  <Text style={styles.leftColor}>Không</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={styles.popupOptionAll}
-                  onPress={() => setModalVisible(true)}>
-                  <Ionicons name="trash" size={17} color={'black'} />
-                  <Text style={styles.titleOptionAll}>Xoá bản ghi</Text>
+                  style={styles.clickRight}
+                  onPress={() => {
+                    if (checkBoxLongPress) {
+                      handleDeleteAll();
+                    } else {
+                      handleDelete();
+                    }
+                  }}>
+                  <Text style={styles.rightColor}>Có</Text>
                 </TouchableOpacity>
               </View>
-            )}
+            </View>
           </View>
-        )}
-      </View>
+        </Modal>
+        <View style={styles.containerContent}>
+          <View style={styles.containerHeader}>
+            <Ionicons name="arrow-back" size={20} color={'white'} />
+            <Text style={styles.titleHeader}>Vấn đề phát sinh</Text>
+            <Text />
+          </View>
+
+          <View style={styles.containerList}>
+            <View style={styles.containerSearch}>
+              <View style={styles.blockSearch}>
+                <TextInput
+                  multiline={false}
+                  style={styles.inputSearch}
+                  placeholder="Mã vấn đề, Đơn vị phát sinh, Lĩnh vực, Loại vấn đề, Từ khóa"
+                  numberOfLines={1}
+                  value={value}
+                  onChangeText={(text: string) => onChangeText(text)}
+                />
+                <AntDesign name="search1" size={20} style={styles.iconSearch} />
+              </View>
+            </View>
+
+            <View style={styles.containerListData}>
+              {datalist.length > 0 ? (
+                <ListProblem
+                  setModalVisible={setModalVisible}
+                  isModalVisible={isModalVisible}
+                  dataList={datalist}
+                  setIndexData={setIndexData}
+                  setDistance={setDistance}
+                  distance={distance}
+                  key={datalist}
+                  setCheckboxLongPress={setCheckboxLongPress}
+                  checkBoxLongPress={checkBoxLongPress}
+                  handleCheckedItem={handleCheckedItem}
+                  setDataList={setDataList}
+                />
+              ) : (
+                <View style={styles.containerSearchEmpty}>
+                  <Image
+                    source={images.searchempty}
+                    style={styles.emptyImage}
+                  />
+                  <Text style={styles.textEmpty}>
+                    Không có vấn đề phát sinh nào
+                  </Text>
+                </View>
+              )}
+            </View>
+          </View>
+
+          {checkBoxLongPress && (
+            <View style={styles.clickAllContainer}>
+              <CheckBox
+                value={checkAll}
+                onValueChange={() => handleCheckAll()}
+              />
+              <Text style={styles.colorBlack}>Chọn tất cả</Text>
+            </View>
+          )}
+          {!checkBoxLongPress ? (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ProblemArisingAdd' as never)}
+              style={styles.iconClick}>
+              <Ionicons name="add" color={'white'} size={35} />
+            </TouchableOpacity>
+          ) : (
+            <View
+              style={{
+                width: 60,
+                height: 80,
+                position: 'absolute',
+                bottom: '20%',
+                right: '2%',
+              }}>
+              <TouchableOpacity
+                onPress={() => setOptionClickAll(true)}
+                style={[styles.iconClick, {zIndex: 99}]}>
+                <Entypo
+                  name="dots-three-horizontal"
+                  color={'white'}
+                  size={35}
+                />
+              </TouchableOpacity>
+              {optionClickAll && (
+                <View style={styles.popupClickAll}>
+                  <TouchableOpacity style={styles.popupOptionAll}>
+                    <Image
+                      source={images.gitDiff}
+                      style={styles.imageOptionAll}
+                    />
+                    <Text style={styles.titleOptionAll}>Chuyển phân tích</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.popupOptionAll}
+                    onPress={() => setModalVisible(true)}>
+                    <Ionicons name="trash" size={17} color={'black'} />
+                    <Text style={styles.titleOptionAll}>Xoá bản ghi</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+          )}
+        </View>
+      </SafeAreaView>
     </View>
   );
 };
