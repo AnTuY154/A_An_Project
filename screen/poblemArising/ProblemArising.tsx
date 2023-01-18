@@ -19,6 +19,8 @@ import CheckBox from '@react-native-community/checkbox';
 import Entypo from 'react-native-vector-icons/Entypo';
 import _ from 'lodash';
 import {v4 as uuid} from 'uuid';
+import PopupOption from './popUp-option/PopupOption';
+import Toast from 'react-native-toast-message';
 
 const ProblemArising = () => {
   const dataProblemArising = [
@@ -260,6 +262,7 @@ const ProblemArising = () => {
   const [checkBoxLongPress, setCheckboxLongPress] = useState<boolean>(false);
   const [checkAll, setCheckAll] = useState<boolean>(false);
   const [optionClickAll, setOptionClickAll] = useState<boolean>(false);
+  const [option, setOption] = useState<string>('');
 
   const onChangeText = (text: string) => {
     const response = dataProblemArising.filter(item => {
@@ -327,6 +330,45 @@ const ProblemArising = () => {
     }
   }, [checkBoxLongPress]);
 
+  const optionTitle = text => {
+    if (text == 'delete') {
+      if (checkBoxLongPress) {
+        return 'Bạn có chắc chắn muốn xóa nhiều vấn đề phát sinh không?';
+      }
+      return 'Bạn có chắc chắn muốn xóa vấn đề phát sinh không?';
+    }
+    if (text == 'transferAnalysis') {
+      return 'Bạn có chắc chắn muốn chuyển phân tích không?';
+    }
+    if (text == 'cancleAnalysis') {
+      return 'Bạn có chắc chắn muốn huỷ phân tích không?';
+    }
+  };
+
+  const onPress = () => {
+    if (option == 'delete') {
+      if (checkBoxLongPress) {
+        handleDeleteAll();
+      } else {
+        handleDelete();
+      }
+    }
+    if (option == 'transferAnalysis') {
+      Toast.show({
+        type: 'success',
+        text1: 'Hello',
+        text2: 'Bạn chuyển phân tích thanh công 👋',
+      });
+    }
+    if (option == 'cancleAnalysis') {
+      Toast.show({
+        type: 'success',
+        text1: 'Hello',
+        text2: 'This is some something 👋',
+      });
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -336,34 +378,12 @@ const ProblemArising = () => {
       />
 
       <SafeAreaView style={styles.container}>
-        <Modal isVisible={isModalVisible}>
-          <View style={styles.modalContainer}>
-            <View style={styles.modalBlock}>
-              <Text style={styles.black}>
-                Bạn có chắc chắn muốn xóa vấn đề phát sinh không?
-              </Text>
-              <View style={styles.containerClick}>
-                <TouchableOpacity
-                  style={styles.clickLeft}
-                  onPress={() => setModalVisible(!isModalVisible)}>
-                  <Text style={styles.leftColor}>Không</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.clickRight}
-                  onPress={() => {
-                    if (checkBoxLongPress) {
-                      handleDeleteAll();
-                    } else {
-                      handleDelete();
-                    }
-                  }}>
-                  <Text style={styles.rightColor}>Có</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </Modal>
-
+        <PopupOption
+          title={optionTitle(option)}
+          onPress={onPress}
+          setModalVisible={setModalVisible}
+          isModalVisible={isModalVisible}
+        />
         <View style={styles.containerContent}>
           <View style={styles.containerHeader}>
             <Ionicons
@@ -404,6 +424,7 @@ const ProblemArising = () => {
                   checkBoxLongPress={checkBoxLongPress}
                   handleCheckedItem={handleCheckedItem}
                   setDataList={setDataList}
+                  setOption={setOption}
                 />
               ) : (
                 <View style={styles.containerSearchEmpty}>
@@ -456,7 +477,9 @@ const ProblemArising = () => {
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={styles.popupOptionAll}
-                    onPress={() => setModalVisible(true)}>
+                    onPress={() => (
+                      setModalVisible(true), setOption('delete')
+                    )}>
                     <Ionicons name="trash" size={17} color={'black'} />
                     <Text style={styles.titleOptionAll}>Xoá bản ghi</Text>
                   </TouchableOpacity>

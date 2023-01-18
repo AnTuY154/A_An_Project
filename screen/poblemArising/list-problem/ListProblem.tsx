@@ -24,6 +24,7 @@ interface TypeListProblem {
   setCheckboxLongPress: Dispatch<SetStateAction<boolean>>;
   handleCheckedItem: (id: any) => void;
   setDataList: any;
+  setOption: any;
 }
 
 const ListProblem: React.FC<TypeListProblem> = ({
@@ -37,6 +38,7 @@ const ListProblem: React.FC<TypeListProblem> = ({
   checkBoxLongPress,
   handleCheckedItem,
   setDataList,
+  setOption,
 }) => {
   const [click, setClick] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -48,18 +50,26 @@ const ListProblem: React.FC<TypeListProblem> = ({
       <View style={styles.qaContainer} key={item}>
         {item.status == 'Chờ xem xét' && click && (
           <View style={styles.qaContainer}>
-            <TouchableOpacity style={[styles.blockSwipe, styles.borderSwipe]}>
+            <TouchableOpacity
+              style={[styles.blockSwipe, styles.borderSwipe]}
+              onPress={() => (
+                setOption('transferAnalysis'), setModalVisible(!isModalVisible)
+              )}>
               <Image source={images.gitDiff} style={styles.imageIcon} />
               <Text style={styles.colorGit}>Chuyển phân tích</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.blockSwipe, styles.backgroundDoc]}>
+            <TouchableOpacity
+              style={[styles.blockSwipe, styles.backgroundDoc]}
+              onPress={() => setOption('copy')}>
               <Image source={images.doc} style={styles.imageIcon} />
               <Text style={styles.titleIcon}>Sao chép</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.blockSwipe, styles.backgroundTrash]}
               onPress={() => (
-                setModalVisible(!isModalVisible), setIndexData(item.id)
+                setModalVisible(!isModalVisible),
+                setIndexData(item.id),
+                setOption('delete')
               )}>
               <Image source={images.trash} style={styles.imageIcon} />
               <Text style={styles.titleIcon}>Xóa</Text>
@@ -69,6 +79,9 @@ const ListProblem: React.FC<TypeListProblem> = ({
 
         {item.status == 'Chưa xử lý' && click && (
           <TouchableOpacity
+            onPress={() => (
+              setOption('cancleAnalysis'), setModalVisible(!isModalVisible)
+            )}
             style={[styles.blockSwipe, styles.backgroundCancelProblem]}>
             <Image source={images.gitDiff} style={styles.imageIcon} />
             <Text style={styles.white}>Hủy chuyển phân tích</Text>
@@ -83,7 +96,7 @@ const ListProblem: React.FC<TypeListProblem> = ({
       setLoading(true);
       const data = {
         id: uuid(),
-        key: uuid(),
+        key: dataList.length + 1,
 
         sourceProblem: '10.VĐPS_303',
         typeProblem: 'Khiếu nại',
@@ -119,8 +132,6 @@ const ListProblem: React.FC<TypeListProblem> = ({
         iconStatus: 'inactive',
         isChecked: false,
       };
-      console.log('loading111', loading);
-
       setTimeout(() => {
         setLoading(false);
         setDataList(current => [...current, data]);
@@ -130,7 +141,8 @@ const ListProblem: React.FC<TypeListProblem> = ({
     }
     // setLoading(false);
   };
-  console.log('loading', loading);
+
+  console.log('dtaaa', dataList);
   return (
     <View style={styles.fullWidth}>
       <SwipeListView
@@ -164,9 +176,9 @@ const ListProblem: React.FC<TypeListProblem> = ({
             }
           });
           const responseFormat = response.filter(itemFormat => itemFormat);
-          if (responseFormat[0].status == 'Chờ xem xét') {
+          if (responseFormat[0]?.status == 'Chờ xem xét') {
             setDistance(-240);
-          } else if (responseFormat[0].status == 'Chưa xử lý') {
+          } else if (responseFormat[0]?.status == 'Chưa xử lý') {
             setDistance(-90);
           }
         }}
