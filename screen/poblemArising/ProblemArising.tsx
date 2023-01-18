@@ -14,7 +14,7 @@ import images from '../assets/images';
 import styles from './styles';
 import Modal from 'react-native-modal';
 import ListProblem from './list-problem/ListProblem';
-import {NavigationContext, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import CheckBox from '@react-native-community/checkbox';
 import Entypo from 'react-native-vector-icons/Entypo';
 import _ from 'lodash';
@@ -58,7 +58,6 @@ const ProblemArising = () => {
       status: 'Chờ xem xét',
       iconStatus: 'inactive',
       isChecked: false,
-      
     },
     {
       id: uuid(),
@@ -254,11 +253,11 @@ const ProblemArising = () => {
 
   const [value, setValue] = useState('');
   const [datalist, setDataList] = useState<any>(dataProblemArising);
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [indexData, setIndexData] = useState(0);
-  const [distance, setDistance] = useState(0);
+  const [isModalVisible, setModalVisible] = useState<boolean>(false);
+  const [indexData, setIndexData] = useState<number>(0);
+  const [distance, setDistance] = useState<number>(0);
   const navigation = useNavigation();
-  const [checkBoxLongPress, setCheckboxLongPress] = useState(false);
+  const [checkBoxLongPress, setCheckboxLongPress] = useState<boolean>(false);
   const [checkAll, setCheckAll] = useState<boolean>(false);
   const [optionClickAll, setOptionClickAll] = useState<boolean>(false);
 
@@ -335,6 +334,7 @@ const ProblemArising = () => {
         source={require('../assets/app_bg.png')}
         style={styles.backgroundImage}
       />
+
       <SafeAreaView style={styles.container}>
         <Modal isVisible={isModalVisible}>
           <View style={styles.modalContainer}>
@@ -363,6 +363,7 @@ const ProblemArising = () => {
             </View>
           </View>
         </Modal>
+
         <View style={styles.containerContent}>
           <View style={styles.containerHeader}>
             <Ionicons name="arrow-back" size={20} color={'white'} />
@@ -394,7 +395,6 @@ const ProblemArising = () => {
                   setIndexData={setIndexData}
                   setDistance={setDistance}
                   distance={distance}
-                  key={datalist}
                   setCheckboxLongPress={setCheckboxLongPress}
                   checkBoxLongPress={checkBoxLongPress}
                   handleCheckedItem={handleCheckedItem}
@@ -430,14 +430,7 @@ const ProblemArising = () => {
               <Ionicons name="add" color={'white'} size={35} />
             </TouchableOpacity>
           ) : (
-            <View
-              style={{
-                width: 60,
-                height: 80,
-                position: 'absolute',
-                bottom: '20%',
-                right: '2%',
-              }}>
+            <View style={styles.dottedView}>
               <TouchableOpacity
                 onPress={() => setOptionClickAll(true)}
                 style={[styles.iconClick, {zIndex: 99}]}>

@@ -43,21 +43,21 @@ interface TypeDataCheckbox {
 }
 
 const ProblemArisingAdd = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
     {label: 'Apple', value: 'apple'},
     {label: 'Banana', value: 'banana'},
   ]);
 
-  const [openField, setOpenField] = useState(false);
+  const [openField, setOpenField] = useState<boolean>(false);
   const [valueField, setValueField] = useState(null);
   const [itemsField, setItemsField] = useState([
     {label: 'Apple', value: 'apple'},
     {label: 'Banana', value: 'banana'},
   ]);
 
-  const [loadingMore, setLoadingMore] = useState(false);
+  const [loadingMore, setLoadingMore] = useState<boolean>(false);
   const dataCheckbox = [
     {
       id: uuid(),
@@ -104,25 +104,25 @@ const ProblemArisingAdd = () => {
   const dataAppend = [
     {
       id: uuid(),
-      name: '11',
+      name: uuid(),
       checked: false,
     },
   ];
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [isModalVisible, setModalVisible] = useState<boolean>(false);
   const navigation = useNavigation();
   const [response, setResponse] = React.useState<any>(null);
   const [data, setData] = useState<TypeData[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [modalInput, setModalInput] = useState<boolean>(false);
   const [valueOnchange, setValueOnchange] = useState<TypeData[]>([]);
   const [indexList, setIndexList] = useState<TypeIndexList>();
   const [openList, setOpenList] = useState<boolean>(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const [toggleCheckBox, setToggleCheckBox] = useState<boolean>(false);
   const [dataListCheckbox, setDataListCheckbox] =
     useState<TypeDataCheckbox[]>(dataCheckbox);
-  const [openSearch, setOpenSearch] = useState(false);
-  const [valueInput, setValueInput] = useState('');
-  const [submitForm, setSubitmirForm] = useState(false);
+  const [openSearch, setOpenSearch] = useState<boolean>(false);
+  const [valueInput, setValueInput] = useState<string>('');
+  const [submitForm, setSubitmirForm] = useState<boolean>(false);
 
   const onButtonPress = async (type, options) => {
     if (type === 'capture') {
@@ -134,8 +134,6 @@ const ProblemArisingAdd = () => {
       if (responseValue.errors) {
         console.log('error', responseValue.errors);
       } else {
-        console.log('response', responseValue.assets[0].uri);
-
         setData([
           ...data,
           {
@@ -182,7 +180,6 @@ const ProblemArisingAdd = () => {
   };
 
   const handleCheckbox = indexData => {
-    console.log('innnn', dataCheckbox.length, indexData + 1);
     const response = dataListCheckbox.map((item, index) => {
       if (index == indexData) {
         return {...item, checked: !item.checked};
@@ -214,11 +211,8 @@ const ProblemArisingAdd = () => {
 
   const handleLoareMore = () => {
     setLoadingMore(true);
-    if (loadingMore) {
-      console.log('rinn');
-      const tmp = _.flattenDeep([...dataListCheckbox, dataAppend]);
-      setDataListCheckbox(tmp);
-    }
+    const tmp = _.flattenDeep([...dataListCheckbox, dataAppend]);
+    setDataListCheckbox(tmp);
     setLoadingMore(false);
   };
 
@@ -226,14 +220,7 @@ const ProblemArisingAdd = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         {loading && (
-          <View
-            style={{
-              width: '100%',
-              height: '100%',
-              zIndex: 99,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
+          <View style={styles.loading}>
             <ActivityIndicator size={20} color={'green'} />
           </View>
         )}
@@ -243,9 +230,7 @@ const ProblemArisingAdd = () => {
             size={23}
             onPress={() => navigation.goBack()}
           />
-          <Text style={{fontSize: 15, color: 'black'}}>
-            Thêm mới vấn đề phát sinh
-          </Text>
+          <Text style={styles.titleHeader}>Thêm mới vấn đề phát sinh</Text>
           <Text> </Text>
         </View>
         <Modal
@@ -289,14 +274,7 @@ const ProblemArisingAdd = () => {
           </View>
         </Modal>
 
-        <Modal
-          animationIn="fadeIn"
-          isVisible={modalInput}
-          style={{
-            margin: 0, // This is the important style you need to set
-            alignItems: undefined,
-            justifyContent: undefined,
-          }}>
+        <Modal animationIn="fadeIn" isVisible={modalInput} style={styles.modal}>
           <View style={styles.modalContainerInput}>
             <TouchableOpacity
               style={styles.closeIconClick}
@@ -356,8 +334,6 @@ const ProblemArisingAdd = () => {
                 handleChange,
                 handleBlur,
                 handleSubmit,
-                isSubmitting,
-                /* and other goodies */
               }) => (
                 <View style={styles.blockWidth}>
                   <View>
@@ -444,6 +420,7 @@ const ProblemArisingAdd = () => {
                     <FlatList
                       data={dataListCheckbox}
                       nestedScrollEnabled
+                      style={{height: 180}}
                       renderItem={({item, index}) => {
                         return (
                           <View style={styles.blockCheckbox}>

@@ -255,6 +255,19 @@ const styles = StyleSheet.create({
     marginLeft: 3,
     marginRight: 8,
   },
+  loading: {
+    width: '100%',
+    height: '100%',
+    zIndex: 99,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  titleHeader: {fontSize: 15, color: 'black'},
+  modal: {
+    margin: 0,
+    alignItems: undefined,
+    justifyContent: undefined,
+  },
 });
 
 export default styles;

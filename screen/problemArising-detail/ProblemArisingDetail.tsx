@@ -77,7 +77,6 @@ const ProblemArisingDetail = ({route}) => {
     setValueField('B04 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại');
   }, []);
 
-  console.log('daataaaa', value);
 
   return (
     <>

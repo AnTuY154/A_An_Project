@@ -331,17 +331,28 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   review: {
-    color: '#858585'
+    color: '#858585',
   },
   process: {
-    color:'#E7B401'
+    color: '#E7B401',
   },
   check: {
-    color: '#078CF3'
+    color: '#078CF3',
   },
   fix: {
-    color: '#25A90F'
-  }
+    color: '#25A90F',
+  },
+  fullWidth: {
+    width: '100%',
+    height: '100%',
+  },
+  dottedView: {
+    width: 60,
+    height: 80,
+    position: 'absolute',
+    bottom: '20%',
+    right: '2%',
+  },
 });
 
 export default styles;

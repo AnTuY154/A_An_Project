@@ -17,24 +17,12 @@ const ItemList = ({
 
   const navigation = useNavigation();
 
-  const checkStatus = () => {
-    if (String(itemData.iconStatus) === 'Chưa xử lý') {
-      return '#E7B401';
-    } else if (String(itemData.iconStatus) === 'Chờ xem xét') {
-      return '#858585';
-    } else if (String(itemData.iconStatus) === 'Thực hiện kiểm tra') {
-      return '#078CF3';
-    } else if (String(itemData.iconStatus) === 'Thực hiện khắc phục') {
-      return '#25A90F';
-    }
-  };
   return (
     <TouchableOpacity
       style={[
         styles.containerItem,
         {backgroundColor: itemData.isChecked ? '#FFDFDF' : 'white'},
       ]}
-      key={uuid()}
       onLongPress={() => (
         setClick(false), setCheckboxLongPress(!checkBoxLongPress)
       )}
@@ -81,9 +69,9 @@ const ItemList = ({
             <View style={styles.blockLeft}>
               <Text style={styles.unitBlock}>
                 Đơn vị phát sinh:{' '}
-                {itemData.unitProblem.map(item => (
-                <Text>{item.name} , </Text>
-              ))}
+                {itemData.unitProblem?.map(item => (
+                  <Text key={item.id}>{item.name} , </Text>
+                ))}
               </Text>
               <Text style={styles.fieldBlock} numberOfLines={1}>
                 Lĩnh vực: {itemData.field}

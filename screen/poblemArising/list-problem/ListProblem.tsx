@@ -1,24 +1,9 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, {Dispatch, SetStateAction, useState} from 'react';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {SwipeListView} from 'react-native-swipe-list-view';
-import SwipeableFlatList from 'react-native-swipeable-list';
 import images from '../../assets/images';
 import styles from '../styles';
 import ItemList from './ItemList';
-import {useIsFocused} from '@react-navigation/native';
 import _ from 'lodash';
 import {v4 as uuid} from 'uuid';
 
@@ -27,11 +12,11 @@ interface TypeListProblem {
   dataList: any;
   isModalVisible: boolean;
   setIndexData: Dispatch<SetStateAction<number>>;
-  setDistance: any;
-  distance: any;
-  checkBoxLongPress: any;
-  setCheckboxLongPress: any;
-  handleCheckedItem: any;
+  setDistance: Dispatch<SetStateAction<number>>;
+  distance: number;
+  checkBoxLongPress: boolean;
+  setCheckboxLongPress: Dispatch<SetStateAction<boolean>>;
+  handleCheckedItem:(id: any) => void
   setDataList: any;
 }
 
@@ -47,7 +32,6 @@ const ListProblem: React.FC<TypeListProblem> = ({
   handleCheckedItem,
   setDataList,
 }) => {
-  const isFocused = useIsFocused();
   const [click, setClick] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -88,64 +72,55 @@ const ListProblem: React.FC<TypeListProblem> = ({
     );
   };
 
+
+  const data = {
+    id: uuid(),
+    key: uuid(),
+
+    sourceProblem: '10.VĐPS_303',
+    typeProblem: 'Khiếu nại',
+    unitProblem: [
+      {
+        id: '1',
+        name: 'khoi co quan Thach That',
+      },
+      {
+        id: '2',
+        name: 'khoi co quan Thach That',
+      },
+    ],
+    title: 'quan doi nhan dan viet nam',
+    job: 'Về việc tiếp nhận các khiếu nại đến CSKH',
+    field: 'B04 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
+    content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội dung',
+    imageList: [
+      {
+        id: '1',
+        image:
+          'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+        value: '12345',
+      },
+      {
+        id: '2',
+        image:
+          'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+        value: '12345',
+      },
+    ],
+    status: 'Chờ xem xét',
+    iconStatus: 'inactive',
+    isChecked: false,
+  };
+
   const handleLoadMore = () => {
     setLoading(true);
-    const data = [
-      {
-        id: uuid(),
-        key: uuid(),
 
-        sourceProblem: '10.VĐPS_303',
-        typeProblem: 'Khiếu nại',
-        unitProblem: [
-          {
-            id: '1',
-            name: 'khoi co quan Thach That',
-          },
-          {
-            id: '2',
-            name: 'khoi co quan Thach That',
-          },
-        ],
-        title: 'quan doi nhan dan viet nam',
-        job: 'Về việc tiếp nhận các khiếu nại đến CSKH',
-        field: 'B04 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
-        content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội dung',
-        imageList: [
-          {
-            id: '1',
-            image:
-              'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
-            value: '12345',
-          },
-          {
-            id: '2',
-            image:
-              'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
-            value: '12345',
-          },
-        ],
-        status: 'Chờ xem xét',
-        iconStatus: 'inactive',
-        isChecked: false,
-      },
-    ];
-    setDataList(_.flattenDeep([...dataList, data]));
+    setDataList(current => [...current, data]);
     setLoading(false);
-  };
-  const [scrollPosition, setScrollPosition] = React.useState(0);
-
-  const handleScroll = event => {
-    let yOffset = event.nativeEvent.contentOffset.y / 90;
-    setScrollPosition(yOffset);
   };
 
   return (
-    <View
-      style={{
-        width: '100%',
-        height: '90%',
-      }}>
+    <View style={styles.fullWidth}>
       <SwipeListView
         data={dataList}
         renderItem={item => (
@@ -168,8 +143,7 @@ const ListProblem: React.FC<TypeListProblem> = ({
         onRowClose={() => setClick(false)}
         onRowOpen={() => setClick(true)}
         onRowDidOpen={() => setClick(true)}
-        onScroll={event => handleScroll(event)}
-        initialScrollIndex={scrollPosition}
+        style={styles.fullWidth}
         swipeGestureBegan={itemView => {
           setClick(true);
           const response = dataList.map((itemData, index) => {
@@ -184,30 +158,11 @@ const ListProblem: React.FC<TypeListProblem> = ({
             setDistance(-90);
           }
         }}
-        onEndReached={() => {
-          if (!loading) {
-            handleLoadMore();
-          }
-        }}
-        onEndReachedThreshold={0.2}
-        initialNumToRender={10}
-        ListFooterComponent={() => {
-          return (
-            <>
-              {loading ? (
-                <View style={{width: '100%', backgroundColor: 'green'}}>
-                  <ActivityIndicator color={'green'} size={'large'} />
-                </View>
-              ) : null}
-            </>
-          );
-        }}
+        onEndReached={() => handleLoadMore()}
+        onEndReachedThreshold={0}
       />
     </View>
   );
 };
 
 export default ListProblem;
-function uuidv4() {
-  throw new Error('Function not implemented.');
-}
