@@ -22,6 +22,7 @@ import ManageGroup from './screen/manageGroup/manageGroup';
 import ProblemArising from './screen/poblemArising/ProblemArising';
 import {createStackNavigator} from '@react-navigation/stack';
 import ProblemArisingAdd from './screen/problemArising-add/ProblemArisingAdd';
+import ProblemArisingDetail from './screen/problemArising-detail/ProblemArisingDetail';
 
 const Stack = createStackNavigator();
 const GroupStack = createStackNavigator();
@@ -30,6 +31,7 @@ const RootStack = createStackNavigator();
 
 import SeachAdvanced from './component/SearchAdvance/searchAdvanced';
 import ManageGroupDetail from './screen/manageGroupDetail/manageGroupDetail';
+import SwipList from './screen/swip-list/SwipList';
 import Home from './screen/homeScreen/homeScreen';
 
 // const Stack = createNativeStackNavigator();
@@ -49,8 +51,14 @@ const App = () => {
   function MyStackNavigator() {
     return (
       <Stack.Navigator screenOptions={{headerShown: false}}>
+        {/* <Stack.Screen name="SwipList" component={SwipList} /> */}
+
         <Stack.Screen name="ProblemArising" component={ProblemArising} />
         <Stack.Screen name="ProblemArisingAdd" component={ProblemArisingAdd} />
+        <Stack.Screen
+          name="ProblemArisingDetail"
+          component={ProblemArisingDetail}
+        />
       </Stack.Navigator>
     );
   }

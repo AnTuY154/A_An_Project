@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    zIndex: 99,
   },
   backgroundImage: {
     flex: 1,
@@ -60,24 +61,41 @@ const styles = StyleSheet.create({
   },
   containerListData: {
     width: '100%',
-    height: '88%',
+    height: '100%',
   },
   containerItem: {
     // width: '100%',
     height: 90,
-    paddingHorizontal: 14,
+    paddingHorizontal: 10,
     flexDirection: 'column',
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     zIndex: 99,
     cursor: 'pointer',
+    marginBottom: 10,
   },
+  blockList: {
+    // backgroundColor: 'white',
+    width: '100%',
+    height: '100%',
+    zIndex: 99,
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+  listLeft: {
+    width: '5%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingRight: 6,
+  },
+  listRight: {width: '95%', height: '100%', paddingRight: 6},
   blockItem: {
     width: '100%',
     height: '75%',
     flexDirection: 'row',
     borderBottomWidth: 0.8,
     borderBottomColor: '#D6D5D5',
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     // backgroundColor: 'yellow',
   },
   blockLeft: {
@@ -101,7 +119,7 @@ const styles = StyleSheet.create({
   statusBlock: {
     fontSize: 12,
     // textAlign: 'center',
-    color: '#E7B401',
+    // color: '#E7B401',
   },
   imageStatus: {width: 30, height: 30, alignSelf: 'flex-end'},
   colorDisable: {
@@ -118,7 +136,7 @@ const styles = StyleSheet.create({
     height: '25%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
   },
 
   qaContainer: {
@@ -252,6 +270,7 @@ const styles = StyleSheet.create({
     bottom: '15%',
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 99,
   },
   containerSearchEmpty: {
     width: '100%',
@@ -261,6 +280,79 @@ const styles = StyleSheet.create({
   },
   emptyImage: {width: 50, height: 50},
   textEmpty: {textAlign: 'center', marginTop: 10},
+  clickAllContainer: {
+    width: '100%',
+    height: 45,
+    backgroundColor: '#FFDFDF',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 99,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingLeft: 15,
+  },
+  colorBlack: {
+    color: 'black',
+  },
+  popupOptionAll: {
+    width: '100%',
+    height: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingLeft: 6,
+  },
+  imageOptionAll: {width: 18, height: 18},
+  titleOptionAll: {
+    color: 'black',
+    marginLeft: 10,
+    fontSize: 12,
+  },
+  popupClickAll: {
+    width: 200,
+    height: 60,
+    position: 'absolute',
+    top: '47%',
+    right: '85%',
+    borderRadius: 20,
+    backgroundColor: 'white',
+    zIndex: 0,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
+  },
+  review: {
+    color: '#858585',
+  },
+  process: {
+    color: '#E7B401',
+  },
+  check: {
+    color: '#078CF3',
+  },
+  fix: {
+    color: '#25A90F',
+  },
+  fullWidth: {
+    width: '100%',
+    height: '100%',
+  },
+  dottedView: {
+    width: 60,
+    height: 80,
+    position: 'absolute',
+    bottom: '20%',
+    right: '2%',
+  },
 });
 
 export default styles;
