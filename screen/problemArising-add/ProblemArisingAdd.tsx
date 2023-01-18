@@ -20,6 +20,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './styles';
 import CheckBox from '@react-native-community/checkbox';
 import {formValidationSchema} from '../utils/Utils';
+import _ from 'lodash';
+import {v4 as uuid} from 'uuid';
 
 interface TypeData {
   image: string;
@@ -53,49 +55,57 @@ const ProblemArisingAdd = () => {
     {label: 'Banana', value: 'banana'},
   ]);
 
+  const [loadingMore, setLoadingMore] = useState(false);
   const dataCheckbox = [
     {
-      id: '1',
+      id: uuid(),
       name: 'Khoi cơ quan Tap đoan',
       checked: false,
     },
     {
-      id: '2',
+      id: uuid(),
       name: 'Khoi cơ quan Thach That',
       checked: true,
     },
     {
-      id: '3',
+      id: uuid(),
       name: 'Khoi co quan viettiel',
       checked: false,
     },
     {
-      id: '4',
+      id: uuid(),
       name: 'Khoi co quan dien luc',
       checked: false,
     },
     {
-      id: '5',
+      id: uuid(),
       name: 'Khoi co quan support',
       checked: true,
     },
     {
-      id: '6',
+      id: uuid(),
       name: 'Khoi co quan dep trai',
       checked: false,
     },
     {
-      id: '7',
+      id: uuid(),
       name: 'Khoi co quan hot boy',
       checked: false,
     },
     {
-      id: '8',
+      id: uuid(),
       name: 'Tất cả',
       checked: false,
     },
   ];
 
+  const dataAppend = [
+    {
+      id: uuid(),
+      name: '11',
+      checked: false,
+    },
+  ];
   const [isModalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
   const [response, setResponse] = React.useState<any>(null);
@@ -198,6 +208,16 @@ const ProblemArisingAdd = () => {
     if (text === '') {
       setDataListCheckbox(dataCheckbox);
     }
+  };
+
+  const handleLoareMore = () => {
+    setLoadingMore(true);
+    if (loadingMore) {
+      console.log('rinn');
+      const tmp = _.flattenDeep([...dataListCheckbox, dataAppend]);
+      setDataListCheckbox(tmp);
+    }
+    setLoadingMore(false);
   };
 
   return (
@@ -420,6 +440,8 @@ const ProblemArisingAdd = () => {
                         </View>
                       );
                     }}
+                    onEndReached={() => !loadingMore && handleLoareMore()}
+                    onEndReachedThreshold={0.1}
                   />
                 </View>
                 <View>

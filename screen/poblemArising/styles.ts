@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   containerListData: {
     width: '100%',
-    height: '88%',
+    height: '100%',
   },
   containerItem: {
     // width: '100%',

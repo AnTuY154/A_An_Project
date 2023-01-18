@@ -45,7 +45,11 @@ const CameraOption: React.FC<TypeCameraOption> = ({
 
         setImageListView([
           ...imageListView,
-          {image: responseValue.assets[0].uri, value: 'value1'},
+          {
+            image: responseValue.assets[0].uri,
+            value: 'value1',
+            id: imageListView.length + 1,
+          },
         ]);
       }
     } else {
@@ -60,7 +64,11 @@ const CameraOption: React.FC<TypeCameraOption> = ({
           ]);
           setImageListView([
             ...imageListView,
-            {image: response.assets[0].uri, value: 'value1'},
+            {
+              image: response.assets[0].uri,
+              value: 'value1',
+              id: imageListView.length + 1,
+            },
           ]);
 
           setModalVisible(false);

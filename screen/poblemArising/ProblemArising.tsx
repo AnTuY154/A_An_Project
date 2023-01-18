@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   ImageBackground,
@@ -13,28 +13,28 @@ import images from '../assets/images';
 import styles from './styles';
 import Modal from 'react-native-modal';
 import ListProblem from './list-problem/ListProblem';
-import { NavigationContext, useNavigation } from '@react-navigation/native';
+import {NavigationContext, useNavigation} from '@react-navigation/native';
 import CheckBox from '@react-native-community/checkbox';
 import Entypo from 'react-native-vector-icons/Entypo';
 import _ from 'lodash';
+import {v4 as uuid} from 'uuid';
 
 const ProblemArising = () => {
-
   const dataProblemArising = [
     {
-      id: '1',
+      id: uuid(),
       key: '0',
       sourceProblem: '1.VĐPS_303',
       typeProblem: 'Khiếu nại',
       unitProblem: [
         {
           id: '1',
-          name: 'khoi co quan Thach That'
+          name: 'khoi co quan Thach That',
         },
         {
           id: '2',
-          name: 'khoi co quan Thach That'
-        }
+          name: 'khoi co quan Thach That',
+        },
       ],
       title: 'don khieu nai CSKH',
       job: 'Về việc tiếp nhận các khiếu nại đến CSKH',
@@ -43,33 +43,36 @@ const ProblemArising = () => {
       imageList: [
         {
           id: '1',
-          image: 'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
-          value: '12345'
+          image:
+            'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345',
         },
         {
           id: '2',
-          image: 'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
-          value: '12345'
-        }
+          image:
+            'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345',
+        },
       ],
       status: 'Chờ xem xét',
       iconStatus: 'inactive',
-      isChecked: false
+      isChecked: false,
     },
     {
-      id: '2', key: '1',
+      id: uuid(),
+      key: '1',
 
       sourceProblem: '2.VĐPS_303',
       typeProblem: 'Khiếu nại',
       unitProblem: [
         {
           id: '1',
-          name: 'khoi co quan Thach That'
+          name: 'khoi co quan Thach That',
         },
         {
           id: '2',
-          name: 'khoi co quan Thach That'
-        }
+          name: 'khoi co quan Thach That',
+        },
       ],
       title: 'vss tra cong',
       job: 'Về việc tiếp nhận các khiếu nại đến CSKH',
@@ -78,33 +81,36 @@ const ProblemArising = () => {
       imageList: [
         {
           id: '1',
-          image: 'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
-          value: '12345'
+          image:
+            'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345',
         },
         {
           id: '2',
-          image: 'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
-          value: '12345'
-        }
+          image:
+            'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345',
+        },
       ],
       status: 'Chờ xử lý',
       iconStatus: 'inactive',
-      isChecked: false
+      isChecked: false,
     },
     {
-      id: '3', key: '2',
+      id: uuid(),
+      key: '2',
 
       sourceProblem: '3.VĐPS_303',
       typeProblem: 'Khiếu nại',
       unitProblem: [
         {
           id: '1',
-          name: 'khoi co quan Thach That'
+          name: 'khoi co quan Thach That',
         },
         {
           id: '2',
-          name: 'khoi co quan Thach That'
-        }
+          name: 'khoi co quan Thach That',
+        },
       ],
       title: 'don khieu nai dep trai',
       job: 'Về việc tiếp nhận các khiếu nại đến CSKH',
@@ -113,33 +119,36 @@ const ProblemArising = () => {
       imageList: [
         {
           id: '1',
-          image: 'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
-          value: '12345'
+          image:
+            'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345',
         },
         {
           id: '2',
-          image: 'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
-          value: '12345'
-        }
+          image:
+            'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345',
+        },
       ],
       status: 'Thực hiện kiểm tra',
       iconStatus: 'inactive',
-      isChecked: false
+      isChecked: false,
     },
     {
-      id: '4', key: '3',
+      id: uuid(),
+      key: '3',
 
       sourceProblem: '4.VĐPS_303',
       typeProblem: 'Khiếu nại',
       unitProblem: [
         {
           id: '1',
-          name: 'khoi co quan Thach That'
+          name: 'khoi co quan Thach That',
         },
         {
           id: '2',
-          name: 'khoi co quan Thach That'
-        }
+          name: 'khoi co quan Thach That',
+        },
       ],
       title: 'quan doi nhan dan viet nam',
       job: 'Về việc tiếp nhận các khiếu nại đến CSKH',
@@ -148,20 +157,98 @@ const ProblemArising = () => {
       imageList: [
         {
           id: '1',
-          image: 'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
-          value: '12345'
+          image:
+            'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345',
         },
         {
           id: '2',
-          image: 'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
-          value: '12345'
-        }
+          image:
+            'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345',
+        },
       ],
       status: 'Chờ xem xét',
       iconStatus: 'inactive',
-      isChecked: false
-    }
-  ]
+      isChecked: false,
+    },
+    {
+      id: uuid(),
+      key: '4',
+
+      sourceProblem: '5.VĐPS_303',
+      typeProblem: 'Khiếu nại',
+      unitProblem: [
+        {
+          id: '1',
+          name: 'khoi co quan Thach That',
+        },
+        {
+          id: '2',
+          name: 'khoi co quan Thach That',
+        },
+      ],
+      title: 'quan doi nhan dan viet nam',
+      job: 'Về việc tiếp nhận các khiếu nại đến CSKH',
+      field: 'B04 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
+      content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội dung',
+      imageList: [
+        {
+          id: '1',
+          image:
+            'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345',
+        },
+        {
+          id: '2',
+          image:
+            'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345',
+        },
+      ],
+      status: 'Chờ xem xét',
+      iconStatus: 'inactive',
+      isChecked: false,
+    },
+    {
+      id: uuid(),
+      key: '5',
+
+      sourceProblem: '6.VĐPS_303',
+      typeProblem: 'Khiếu nại',
+      unitProblem: [
+        {
+          id: '1',
+          name: 'khoi co quan Thach That',
+        },
+        {
+          id: '2',
+          name: 'khoi co quan Thach That',
+        },
+      ],
+      title: 'quan doi nhan dan viet nam',
+      job: 'Về việc tiếp nhận các khiếu nại đến CSKH',
+      field: 'B04 - Lĩnh vực Nhân sự | Loại vấn đề: Khiếu nại',
+      content: 'Nội dung vấn đề Nội dung vấn đề Nội dung vấn đề Nội dung',
+      imageList: [
+        {
+          id: '1',
+          image:
+            'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345',
+        },
+        {
+          id: '2',
+          image:
+            'https://media.istockphoto.com/id/1340642632/photo/sunflowers.jpg?b=1&s=170667a&w=0&k=20&c=9Ug32UnodYNOr9DGuLwVRk1WExt3D10xZjMe4ujgwp8=',
+          value: '12345',
+        },
+      ],
+      status: 'Chờ xem xét',
+      iconStatus: 'inactive',
+      isChecked: false,
+    },
+  ];
 
   const [value, setValue] = useState('');
   const [datalist, setDataList] = useState<any>(dataProblemArising);
@@ -171,8 +258,7 @@ const ProblemArising = () => {
   const navigation = useNavigation();
   const [checkBoxLongPress, setCheckboxLongPress] = useState(false);
   const [checkAll, setCheckAll] = useState<boolean>(false);
-  const [optionClickAll, setOptionClickAll] = useState<boolean>(false)
-
+  const [optionClickAll, setOptionClickAll] = useState<boolean>(false);
 
   const onChangeText = (text: string) => {
     const response = dataProblemArising.filter(item => {
@@ -191,54 +277,54 @@ const ProblemArising = () => {
   }, [value]);
 
   const handleDelete = () => {
-    const response = datalist.filter((item, index) => item.id !== indexData)
+    const response = datalist.filter((item, index) => item.id !== indexData);
     setDataList(response);
-    setModalVisible(false)
-  }
+    setModalVisible(false);
+  };
 
   const handleCheckAll = () => {
-    const response = datalist.map((item) => {
+    const response = datalist.map(item => {
       if (item.status === 'Chờ xem xét') {
         return {
           ...item,
-          isChecked: !item.isChecked
-        }
+          isChecked: !item.isChecked,
+        };
       } else {
         return item;
       }
-    })
-    setCheckAll(!checkAll)
-    setDataList(response)
-  }
+    });
+    setCheckAll(!checkAll);
+    setDataList(response);
+  };
 
-  const handleCheckedItem = (id) => {
-    const response = datalist.map((item) => {
-      if(item.id == id){
+  const handleCheckedItem = id => {
+    const response = datalist.map(item => {
+      if (item.id == id) {
         return {
           ...item,
-          isChecked: !item.isChecked
-        }
-      }else{
-       return item
-      }     
-    }) 
-    setDataList(response)
-  }
+          isChecked: !item.isChecked,
+        };
+      } else {
+        return item;
+      }
+    });
+    setDataList(response);
+  };
 
   const handleDeleteAll = () => {
-    const response = datalist.filter((item) => item.isChecked);
+    const response = datalist.filter(item => item.isChecked);
     var dif = _.differenceWith(datalist, response, _.isEqual);
-    setDataList(dif)
-    setCheckboxLongPress(false)
-    setModalVisible(false)
-  }
+    setDataList(dif);
+    setCheckboxLongPress(false);
+    setModalVisible(false);
+  };
 
   useEffect(() => {
-    if(!checkBoxLongPress){
-      setCheckAll(false)
-      setOptionClickAll(false)
+    if (!checkBoxLongPress) {
+      setCheckAll(false);
+      setOptionClickAll(false);
     }
-  }, [checkBoxLongPress])
+  }, [checkBoxLongPress]);
 
   return (
     <View style={styles.container}>
@@ -262,10 +348,10 @@ const ProblemArising = () => {
               <TouchableOpacity
                 style={styles.clickRight}
                 onPress={() => {
-                  if(checkBoxLongPress){
-                    handleDeleteAll()
-                  }else{
-                    handleDelete()
+                  if (checkBoxLongPress) {
+                    handleDeleteAll();
+                  } else {
+                    handleDelete();
                   }
                 }}>
                 <Text style={styles.rightColor}>Có</Text>
@@ -309,6 +395,7 @@ const ProblemArising = () => {
                 setCheckboxLongPress={setCheckboxLongPress}
                 checkBoxLongPress={checkBoxLongPress}
                 handleCheckedItem={handleCheckedItem}
+                setDataList={setDataList}
               />
             ) : (
               <View style={styles.containerSearchEmpty}>
@@ -321,44 +408,51 @@ const ProblemArising = () => {
           </View>
         </View>
 
-        {
-          checkBoxLongPress &&
+        {checkBoxLongPress && (
           <View style={styles.clickAllContainer}>
             <CheckBox value={checkAll} onValueChange={() => handleCheckAll()} />
             <Text style={styles.colorBlack}>Chọn tất cả</Text>
           </View>
-        }
-        {
-          !checkBoxLongPress ? (
+        )}
+        {!checkBoxLongPress ? (
+          <TouchableOpacity
+            onPress={() => navigation.navigate('ProblemArisingAdd' as never)}
+            style={styles.iconClick}>
+            <Ionicons name="add" color={'white'} size={35} />
+          </TouchableOpacity>
+        ) : (
+          <View
+            style={{
+              width: 60,
+              height: 80,
+              position: 'absolute',
+              bottom: '20%',
+              right: '2%',
+            }}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('ProblemArisingAdd' as never)}
-              style={styles.iconClick}>
-              <Ionicons name="add" color={'white'} size={35} />
+              onPress={() => setOptionClickAll(true)}
+              style={[styles.iconClick, {zIndex: 99}]}>
+              <Entypo name="dots-three-horizontal" color={'white'} size={35} />
             </TouchableOpacity>
-          ) : (
-            <View style={{ width: 60, height: 80, position: 'absolute', bottom: '20%', right: '2%' }}>
-              <TouchableOpacity
-                onPress={() => setOptionClickAll(true)}
-                style={[styles.iconClick, { zIndex: 99 }]}>
-                <Entypo name="dots-three-horizontal" color={'white'} size={35} />
-
-              </TouchableOpacity>
-              {
-                optionClickAll && <View style={styles.popupClickAll}>
-                  <TouchableOpacity style={styles.popupOptionAll}>
-                    <Image source={images.gitDiff} style={styles.imageOptionAll} />
-                    <Text style={styles.titleOptionAll}>Chuyển phân tích</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.popupOptionAll} onPress={() => setModalVisible(true)}>
-                    <Ionicons name='trash' size={17} color={'black'} />
-                    <Text style={styles.titleOptionAll}>Xoá bản ghi</Text>
-                  </TouchableOpacity>
-                </View>
-              }
-
-            </View>
-          )
-        }
+            {optionClickAll && (
+              <View style={styles.popupClickAll}>
+                <TouchableOpacity style={styles.popupOptionAll}>
+                  <Image
+                    source={images.gitDiff}
+                    style={styles.imageOptionAll}
+                  />
+                  <Text style={styles.titleOptionAll}>Chuyển phân tích</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.popupOptionAll}
+                  onPress={() => setModalVisible(true)}>
+                  <Ionicons name="trash" size={17} color={'black'} />
+                  <Text style={styles.titleOptionAll}>Xoá bản ghi</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
+        )}
       </View>
     </View>
   );
