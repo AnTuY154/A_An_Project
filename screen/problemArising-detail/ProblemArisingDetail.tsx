@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   Image,
+  Platform,
   SafeAreaView,
   ScrollView,
   Text,
@@ -34,7 +35,7 @@ const ProblemArisingDetail = ({route}) => {
   const {item} = route.params;
 
   console.log('params', item.typeProblem);
-  const [openList, setOpenList] = useState<boolean>(false);
+  const [openList, setOpenList] = useState<boolean>(true);
   const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
   const [updateDocument, setUpdateDocument] = useState<boolean>(false);
 
@@ -95,6 +96,17 @@ const ProblemArisingDetail = ({route}) => {
               <Text style={styles.titleHeader}>Chi tiết vấn đề phát sinh</Text>
               <Text> </Text>
             </View>
+            <View style={styles.clickContainer}>
+              <TouchableOpacity
+                style={styles.clickBlock}
+                onPress={() => setOpenBottomSheet(!openBottomSheet)}>
+                <MaterialCommunityIcons
+                  name="dots-horizontal"
+                  size={25}
+                  color={'white'}
+                />
+              </TouchableOpacity>
+            </View>
             <Formik
               initialValues={{
                 sourceProblem: item.sourceProblem,
@@ -130,17 +142,6 @@ const ProblemArisingDetail = ({route}) => {
                 /* and other goodies */
               }) => (
                 <View style={styles.containerContent}>
-                  <View style={styles.clickContainer}>
-                    <TouchableOpacity
-                      style={styles.clickBlock}
-                      onPress={() => setOpenBottomSheet(!openBottomSheet)}>
-                      <MaterialCommunityIcons
-                        name="dots-horizontal"
-                        size={25}
-                        color={'white'}
-                      />
-                    </TouchableOpacity>
-                  </View>
                   <ValueInputList
                     item={item.sourceProblem}
                     title="Nguồn vấn đề"
@@ -190,7 +191,11 @@ const ProblemArisingDetail = ({route}) => {
                         renderItem={({item, index}) => {
                           return (
                             <View style={styles.blockCheckbox}>
-                              <CheckBox disabled={false} value={true} />
+                              <CheckBox
+                                disabled={false}
+                                value={true}
+                                style={Platform.OS == 'ios' && styles.checkbox}
+                              />
                               <Text style={{color: '#2F2F2F'}}>
                                 {item.name}
                               </Text>

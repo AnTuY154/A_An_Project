@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   containerContent: {width: '100%', height: '100%', paddingHorizontal: 10},
   titleHeader: {fontSize: 15, color: 'black'},
-  clickContainer: {position: 'absolute', top: '55%', right: '2%', zIndex: 99},
+  clickContainer: {position: 'absolute', top: '45%', right: '2%', zIndex: 99},
   clickBlock: {
     width: 55,
     height: 55,
@@ -193,6 +193,12 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     paddingTop: 0,
     paddingBottom: 0
+  },
+   checkbox: {
+    width: 20,
+    height: 20,
+    marginLeft: 3,
+    marginRight: 8,
   },
 });
 

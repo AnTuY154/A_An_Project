@@ -1,5 +1,5 @@
 import React, {Dispatch, SetStateAction} from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Platform, Text, TouchableOpacity, View} from 'react-native';
 import images from '../../../assets/images';
 import Modal from 'react-native-modal';
 import styles from '../../styles';
@@ -32,14 +32,14 @@ const PopupBottomSheet: React.FC<TypePopupBottomSheet> = ({
           onPress={() => setOpenBottomSheet(false)}
           style={{
             width: '100%',
-            height: '80%',
+            height: Platform.OS === 'ios' ? '85%' : '80%',
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
           }}
         />
         <View
           style={{
             width: '100%',
-            height: '20%',
+            height: Platform.OS === 'ios' ? '15%' : '20%',
             backgroundColor: 'white',
             borderTopLeftRadius: 15,
             borderTopRightRadius: 15,

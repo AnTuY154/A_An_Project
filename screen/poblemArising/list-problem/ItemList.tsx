@@ -81,9 +81,9 @@ const ItemList = ({
             <View style={styles.blockLeft}>
               <Text style={styles.unitBlock}>
                 Đơn vị phát sinh:{' '}
-                {/* {itemData.unitProblem.map(item => (
+                {itemData.unitProblem.map(item => (
                 <Text>{item.name} , </Text>
-              ))} */}
+              ))}
               </Text>
               <Text style={styles.fieldBlock} numberOfLines={1}>
                 Lĩnh vực: {itemData.field}
