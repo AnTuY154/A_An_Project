@@ -353,6 +353,12 @@ const styles = StyleSheet.create({
     bottom: '20%',
     right: '2%',
   },
+  loading: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 60,
+  },
 });
 
 export default styles;
