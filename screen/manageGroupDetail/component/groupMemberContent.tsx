@@ -1,23 +1,7 @@
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  Platform,
-  Linking,
-  ActivityIndicator,
-  Dimensions,
-  ScrollView,
-} from 'react-native';
-import React, {useEffect, useMemo, useState} from 'react';
-import RNFS from 'react-native-fs';
-import FileViewer from 'react-native-file-viewer';
-import GroupInfoItem from './groupInfoItem';
-import {styles as itemStyles} from './groupInfoItem';
+import {ActivityIndicator, ScrollView} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import GroupMemberItem, {GroupMemberItemType} from './groupMemberItem';
+import {styles as commonStyles} from '../styles';
 
 interface GroupMemberContentType {
   isActive: boolean;
@@ -62,7 +46,7 @@ const GroupMemberContent = ({isActive}: GroupMemberContentType) => {
   }, [isActive, data]);
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={commonStyles.container}>
       {data ? (
         data.map((item, index: number) => (
           <GroupMemberItem
@@ -78,31 +62,5 @@ const GroupMemberContent = ({isActive}: GroupMemberContentType) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 10,
-    paddingVertical: 0,
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: '#CFCFCF',
-    borderTopWidth: 0,
-    borderBottomLeftRadius: 16,
-    borderBottomRightRadius: 16,
-    maxHeight: Dimensions.get('window').height / 2,
-  },
-  flex_50: {
-    flexBasis: '50%',
-  },
-  file_container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 10,
-  },
-  image: {
-    width: 20,
-    height: 20,
-  },
-});
 
 export default GroupMemberContent;

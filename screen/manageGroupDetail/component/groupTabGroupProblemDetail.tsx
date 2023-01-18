@@ -2,7 +2,6 @@ import {
   StyleSheet,
   View,
   Text,
-  ScrollView,
   Linking,
   Platform,
   Image,
@@ -10,10 +9,10 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Header from '../../../component/header/header';
-import RNFS from 'react-native-fs';
-import FileViewer from 'react-native-file-viewer';
 import GroupInfoItem from './groupInfoItem';
 import {styles as itemStyles} from './groupInfoItem';
+import {styles as commonStyles} from '../styles';
+import {getFileIcon, openFile} from '../../../common/common';
 
 interface fileType {
   secretId: string;
@@ -59,105 +58,6 @@ function GroupProblemDetail(props) {
     });
   }, []);
 
-  const openFile = (file: any) => {
-    const url = `http://10.60.133.35:8688/file/download/${file.secretId}`;
-
-    const extension = file.fileName.split('.')[1];
-
-    // Feel free to change main path according to your requirements.
-    const localFile = `${RNFS.DocumentDirectoryPath}/${file.fileName}`;
-
-    const options = {
-      fromUrl: url,
-      toFile: localFile,
-      progress: (res: any) => {
-        console.log('res down', res);
-      },
-    };
-
-    RNFS.downloadFile(options)
-      .promise.then(() => {
-        FileViewer.open(localFile)
-          .then(data => console.log('data view', data))
-          .catch(error => {
-            if (error) {
-              setTimeout(() => {
-                if (Platform.OS === 'android') {
-                  if (extension === 'pdf') {
-                    Linking.openURL(
-                      'https://play.google.com/store/apps/details?id=com.pdf.reader.pdfviewer.pdfeditor.forandroid',
-                    );
-                  } else if (extension === 'docx') {
-                    Linking.openURL(
-                      'https://play.google.com/store/apps/details?id=com.microsoft.office.word',
-                    );
-                  } else if (extension === 'xls') {
-                    Linking.openURL(
-                      'https://play.google.com/store/apps/details?id=com.microsoft.office.excel',
-                    );
-                  }
-                }
-                if (Platform.OS === 'ios') {
-                  if (extension === 'pdf') {
-                    Linking.openURL(
-                      'https://apps.apple.com/vn/app/pdf/id1532638515?l=vi',
-                    );
-                  } else if (extension === 'docx') {
-                    Linking.openURL(
-                      'https://apps.apple.com/vn/app/microsoft-word/id586447913?l=vi',
-                    );
-                  } else if (extension === 'xls') {
-                    Linking.openURL(
-                      'https://apps.apple.com/vn/app/microsoft-excel/id586683407?l=vi',
-                    );
-                  }
-                }
-              }, 1000);
-            }
-          });
-      })
-      .then(data => {
-        console.log('data new', data);
-      })
-      .catch(error => {
-        console.log('error newe', error);
-      });
-  };
-
-  const getFileIcon = (fileName: string) => {
-    const extension = fileName?.split('.')[1];
-    switch (extension) {
-      case 'doc':
-        return (
-          <Image
-            style={styles.image}
-            source={require('../../assets/word.png')}
-          />
-        );
-      case 'xls':
-        return (
-          <Image
-            style={styles.image}
-            source={require('../../assets/excel.png')}
-          />
-        );
-      case 'pdf':
-        return (
-          <Image
-            style={styles.image}
-            source={require('../../assets/pdf.png')}
-          />
-        );
-      default:
-        return (
-          <Image
-            style={styles.image}
-            source={require('../../assets/image_placeholder.png')}
-          />
-        );
-    }
-  };
-
   return (
     <View style={styles.container}>
       <Header label="Chi tiết vấn đề" />
@@ -174,7 +74,7 @@ function GroupProblemDetail(props) {
               {data.file?.map(item => (
                 <TouchableOpacity
                   onPress={() => openFile(item)}
-                  style={styles.file_container}
+                  style={commonStyles.file_container}
                   key={item.secretId}>
                   {getFileIcon(item.fileName)}
                   <Text style={{color: '#007AD9', paddingHorizontal: 20}}>
@@ -210,15 +110,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-  },
-  image: {
-    width: 20,
-    height: 20,
-  },
-  file_container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 10,
   },
 });
 

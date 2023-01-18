@@ -54,13 +54,12 @@ function GroupTabProblem({data}: GroupTabProblemType) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FAF6F6',
-    marginTop: 8,
+    marginBottom: 8,
     padding: 10,
     borderRadius: 8,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // height: Dimensions.get('window').height / 2,
   },
   title: {
     fontWeight: '400',

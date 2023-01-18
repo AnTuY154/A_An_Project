@@ -1,19 +1,7 @@
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  Platform,
-  Linking,
-  ActivityIndicator,
-  Dimensions,
-  ScrollView,
-} from 'react-native';
+import {ActivityIndicator, ScrollView} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import GroupObjectItem, {GroupObjectItemType} from './groupObjectItem';
+import {styles as commonStyles} from '../styles';
 
 interface GroupObjectContentType {
   isActive: boolean;
@@ -59,7 +47,7 @@ const GroupObjectContent = ({isActive}: GroupObjectContentType) => {
   }, [isActive, data]);
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={commonStyles.container}>
       {data ? (
         data.map((item, index: number) => (
           <GroupObjectItem
@@ -75,19 +63,5 @@ const GroupObjectContent = ({isActive}: GroupObjectContentType) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 10,
-    paddingVertical: 0,
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: '#CFCFCF',
-    borderTopWidth: 0,
-    borderBottomLeftRadius: 16,
-    borderBottomRightRadius: 16,
-    maxHeight: Dimensions.get('window').height / 2,
-  },
-});
 
 export default GroupObjectContent;

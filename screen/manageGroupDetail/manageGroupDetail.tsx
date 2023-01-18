@@ -17,11 +17,9 @@ import {
   Button,
   ScrollView,
 } from 'react-native';
-import React, {useCallback, useMemo, useRef, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import Accordion from 'react-native-collapsible/Accordion';
-import BottomSheet from '@gorhom/bottom-sheet';
 import AccordionHeader from './component/accordionHeader';
-import Entypo from 'react-native-vector-icons/Entypo';
 import GroupInfoContent from './component/groupInfoContent';
 import {useNavigation} from '@react-navigation/native';
 import GroupMemberContent from './component/groupMemberContent';
@@ -107,17 +105,6 @@ const ManageGroupDetail = props => {
   return (
     <View style={styles.container}>
       <Header label="Chi tiết đoàn" />
-      {/* <View style={styles.header}>
-        <Entypo
-          onPress={handleBack}
-          style={styles.back_icon}
-          name="chevron-left"
-          size={24}
-          color="black"
-        />
-
-        <Text style={styles.header_text}>Chi tiết Đoàn</Text>
-      </View> */}
       <ScrollView style={styles.body}>
         <Accordion
           activeSections={activeSections}
