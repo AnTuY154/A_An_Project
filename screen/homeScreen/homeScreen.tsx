@@ -34,7 +34,7 @@ const Home = () => {
         />
 
         <HomeItem
-          onPress={() => handleChangeScreen('ManageGroup')}
+          onPress={() => handleChangeScreen('Dashboard')}
           name="dashboard"
           label="Dashboard"
         />

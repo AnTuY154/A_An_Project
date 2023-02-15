@@ -31,6 +31,7 @@ import Home from './screen/homeScreen/homeScreen';
 import ProblemDetail from './screen/manageGroupDetail/component/groupTabProblemDetail';
 // import GroupTabGroupProblem from './screen/manageGroupDetail/component/groupTabGroupProblem';
 import GroupProblemDetail from './screen/manageGroupDetail/component/groupTabGroupProblemDetail';
+import Dashboard from './screen/dashboard/Dashboard';
 
 // const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -89,6 +90,7 @@ const App = () => {
         <HomeStack.Screen name="Home" component={Home} />
         <HomeStack.Screen name="ManageGroup" component={GroupStackNavigator} />
         <HomeStack.Screen name="MyStack" component={MyStackNavigator} />
+        <HomeStack.Screen name="Dashboard" component={Dashboard} />
       </HomeStack.Navigator>
     );
   };
